@@ -1,6 +1,7 @@
 {
   "private": false,
   "name": "monoxide-api",
+  "description": "🛰️ REST API for Monoxide Ecosystem.",
   "version": "0.0.1",
   "author": "Monoxide <ezralazuardy@students.undip.ac.id>",
   "license": "MIT",
@@ -13,7 +14,8 @@
     "monoxide-api",
     "api",
     "backend",
-    "nuxt"
+    "nuxt",
+    "vue"
   ],
   "scripts": {
     "dev": "nuxi dev",
