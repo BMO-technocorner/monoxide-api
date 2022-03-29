@@ -21,6 +21,7 @@
     "lint": "nuxi typecheck && npm run format && npm run check",
     "format": "prettier --config .prettierrc --write .",
     "check": "prettier --config .prettierrc --check .",
+    "prepare": "husky install",
     "start": "node .output/server/index.mjs"
   },
   "husky": {
