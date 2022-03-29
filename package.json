@@ -24,16 +24,7 @@
     "prepare": "husky install",
     "start": "node .output/server/index.mjs"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "npx commitlint",
-      "pre-commit": "npm run lint",
-      "post merge": "npm install"
-    }
-  },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.3",
-    "@commitlint/config-conventional": "^16.2.1",
     "husky": "^7.0.4",
     "nuxt3": "^3.0.0-27474800.8dd77d7",
     "prettier": "^2.6.1",
