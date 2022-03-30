@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { withHTTPMethod } from "../../../composables/useHTTPAction";
+import { withHTTPMethod } from "~/composables/useHTTPAction";
 
 async function onGET(req: IncomingMessage, res: ServerResponse) {
   return {

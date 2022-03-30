@@ -1,0 +1,94 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-03-30T07:45:36.774Z",
+  "__export_source": "insomnia.desktop.app:v2022.2.1",
+  "resources": [
+    {
+      "_id": "req_1de5873e76ce4ad6bcc0acf80b6fa732",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648625895277,
+      "created": 1648625895277,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/users",
+      "name": "Get All Users",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1648625895277,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "parentId": null,
+      "modified": 1648625650380,
+      "created": 1648625650380,
+      "name": "Monoxide",
+      "description": "REST API Documentation for Monoxide API",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648625650386,
+      "created": 1648625650386,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": {},
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1648625650386,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648625650388,
+      "created": 1648625650388,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_e2c7a6999829449cadc98093faed8e03",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648625650381,
+      "created": 1648625650381,
+      "fileName": "Monoxide",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_0c56a837aecd4cdfb13f23563d788859",
+      "parentId": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
+      "modified": 1648625763046,
+      "created": 1648625763046,
+      "name": "Monoxide Production",
+      "data": {
+        "API_URL": "https://api.monoxide.ezralazuardy.com",
+        "API_VERSION": "v1"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
+      },
+      "color": "#7d69cb",
+      "isPrivate": false,
+      "metaSortKey": 1648625763046,
+      "_type": "environment"
+    }
+  ]
+}

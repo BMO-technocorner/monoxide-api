@@ -1,6 +1,6 @@
 import { defineHandle } from "h3";
-import HTTPAction from "./helper/HTTPAction";
-import HTTPMethod from "./helper/HTTPMethod";
+import HTTPAction from "~/composables/helper/HTTPAction";
+import HTTPMethod from "~/composables/helper/HTTPMethod";
 import type { IncomingMessage, ServerResponse } from "http";
 
 export const useHTTPAction = (req: IncomingMessage, res: ServerResponse) => {
