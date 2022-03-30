@@ -10,21 +10,54 @@ export default class HTTPAction {
     this.res = res;
   }
 
-  onGET = async (req: IncomingMessage, res: ServerResponse) => {};
+  onGET: null | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) =
+    null;
 
-  onPOST = async (req: IncomingMessage, res: ServerResponse) => {};
+  onHEAD: null | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) =
+    null;
 
-  onPUT = async (req: IncomingMessage, res: ServerResponse) => {};
+  onPOST: null | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) =
+    null;
 
-  onPATCH = async (req: IncomingMessage, res: ServerResponse) => {};
+  onPUT: null | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) =
+    null;
 
-  onDELETE = async (req: IncomingMessage, res: ServerResponse) => {};
+  onDELETE:
+    | null
+    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null;
+
+  onCONNECT:
+    | null
+    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null;
+
+  onOPTIONS:
+    | null
+    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null;
+
+  onTRACE:
+    | null
+    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null;
 
   async perform() {
-    if (isMethod(this.req, "GET")) return await this.onGET(this.req, this.res);
+    if (this.onGET && isMethod(this.req, "GET"))
+      return await this.onGET(this.req, this.res);
+    if (this.onHEAD && isMethod(this.req, "HEAD"))
+      return await this.onHEAD(this.req, this.res);
+    if (this.onPOST && isMethod(this.req, "POST"))
+      return await this.onPOST(this.req, this.res);
+    if (this.onPUT && isMethod(this.req, "PUT"))
+      return await this.onPUT(this.req, this.res);
+    if (this.onDELETE && isMethod(this.req, "DELETE"))
+      return await this.onDELETE(this.req, this.res);
+    if (this.onCONNECT && isMethod(this.req, "CONNECT"))
+      return await this.onCONNECT(this.req, this.res);
+    if (this.onOPTIONS && isMethod(this.req, "OPTIONS"))
+      return await this.onOPTIONS(this.req, this.res);
+    if (this.onTRACE && isMethod(this.req, "TRACE"))
+      return await this.onTRACE(this.req, this.res);
     throw createError({
-      statusCode: 404,
-      statusMessage: "",
+      statusCode: 405,
+      statusMessage: "Method Not Allowed",
     });
   }
 }

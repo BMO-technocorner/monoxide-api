@@ -1,35 +1,23 @@
 import { defineHandle } from "h3";
 import HTTPAction from "./helper/HTTPAction";
+import HTTPMethod from "./helper/HTTPMethod";
 import type { IncomingMessage, ServerResponse } from "http";
 
 export const useHTTPAction = (req: IncomingMessage, res: ServerResponse) => {
   return new HTTPAction(req, res);
 };
 
-export const withHTTPMethod = (
-  onGET:
-    | null
-    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null,
-  onPOST:
-    | null
-    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null,
-  onPUT:
-    | null
-    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null,
-  onPATCH:
-    | null
-    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null,
-  onDELETE:
-    | null
-    | ((req: IncomingMessage, res: ServerResponse) => Promise<any>) = null
-) => {
+export const withHTTPMethod = (method: Partial<HTTPMethod>) => {
   return defineHandle(async (req: IncomingMessage, res: ServerResponse) => {
     const action = useHTTPAction(req, res);
-    if (onGET) action.onGET = onGET;
-    if (onPOST) action.onPOST = onPOST;
-    if (onPUT) action.onPUT = onPUT;
-    if (onPATCH) action.onPATCH = onPATCH;
-    if (onDELETE) action.onDELETE = onDELETE;
+    action.onGET = method.onGET ?? null;
+    action.onHEAD = method.onHEAD ?? null;
+    action.onPOST = method.onPOST ?? null;
+    action.onPUT = method.onPUT ?? null;
+    action.onDELETE = method.onDELETE ?? null;
+    action.onCONNECT = method.onCONNECT ?? null;
+    action.onOPTIONS = method.onOPTIONS ?? null;
+    action.onTRACE = method.onTRACE ?? null;
     return await action.perform();
   });
 };

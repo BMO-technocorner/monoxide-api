@@ -7,4 +7,4 @@ async function onGET(req: IncomingMessage, res: ServerResponse) {
   };
 }
 
-export default withHTTPMethod(onGET);
+export default withHTTPMethod({ onGET });
