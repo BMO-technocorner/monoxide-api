@@ -1,14 +1,14 @@
-<a href="https://api.monoxide.ezralazuardy.com">
-  <img src="https://therealsujitk-vercel-badge.vercel.app/?app=monoxide-api" alt="Deployment">
+<a href="https://github.com/BMO-technocorner/monoxide-api/actions/workflows/cloudflare.yml">
+  <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/Cloudflare%20Deployment?label=build" alt="Build"/>
 </a>
 <a href="https://github.com/BMO-technocorner/monoxide-api/actions/workflows/codeql-analysis.yml">
-  <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/CodeQL?label=security" alt="CodeQL Security Analysis" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/CodeQL?label=security" alt="Security Analysis"/>
 </a>
 <a href="https://github.com/BMO-technocorner/monoxide-api/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/BMO-technocorner/monoxide-api" alt="License" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/github/license/BMO-technocorner/monoxide-api" alt="License"/>
 </a>
 <a href="https://insomnia.rest">
-    <img alt="Documentation" src="https://img.shields.io/badge/%20docs-insomnia-blueviolet">
+    <img alt="Documentation" src="https://img.shields.io/badge/%20docs-insomnia-blueviolet"/>
 </a>
 
 ## :artificial_satellite: Monoxide API
