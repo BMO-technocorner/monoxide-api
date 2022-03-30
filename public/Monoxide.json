@@ -80,10 +80,7 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": [
-          "API_URL",
-          "API_VERSION"
-        ]
+        "&": ["API_URL", "API_VERSION"]
       },
       "color": "#7d69cb",
       "isPrivate": false,
