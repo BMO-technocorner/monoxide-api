@@ -23,19 +23,15 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: 📥 Install Github Action Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
-      - name: ⚙️ Caching node_modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+      - name: 📥 Install NodeJS and NPM
+        uses: bahmutov/npm-install@v1
 
-      - name: 📦 Installing Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+      - name: 📦 Install NPM Dependencies
+        run: npm ci
 
-      - name: 🔨 Building application
+      - name: 🔨 Build Project
         run: npm run build
         env:
           NITRO_PRESET: cloudflare
