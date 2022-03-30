@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-03-30T07:45:36.774Z",
+  "__export_date": "2022-03-30T14:31:45.524Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -76,11 +76,14 @@
       "created": 1648625763046,
       "name": "Monoxide Production",
       "data": {
-        "API_URL": "https://api.monoxide.ezralazuardy.com",
+        "API_URL": "https://api-monoxide.ezralazuardy.com",
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#7d69cb",
       "isPrivate": false,
