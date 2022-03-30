@@ -1,16 +1,14 @@
 name: "Cloudflare Deployment"
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["CodeQL"]
+    types: [completed]
 
 jobs:
-  ci:
+  deployment:
     runs-on: ${{ matrix.os }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     strategy:
       matrix:
