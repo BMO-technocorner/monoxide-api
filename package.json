@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "dev": "nuxi dev",
-    "build": "nuxi build",
+    "build": "npm run lint && nuxi build",
+    "preview": "nuxi preview",
     "lint": "nuxi typecheck && npm run format && npm run check",
     "format": "prettier --write .",
     "check": "prettier --check .",
