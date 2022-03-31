@@ -93,7 +93,7 @@ const monoxideAcronyms = [
     </div>
     <div class="relative pt-6 pb-16 sm:pb-24">
       <div
-        class="flex justify-start max-w-7xl mx-auto px-4 sm:px-6 mt-6 sm:mt-16"
+        class="flex justify-start max-w-7xl mx-auto px-8 sm:px-6 mt-6 sm:mt-16"
       >
         <span data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
           <ThemeToggler />
@@ -158,7 +158,7 @@ const monoxideAcronyms = [
         />
       </div>
       <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 pb-12"
+        class="max-w-7xl mx-auto px-8 sm:px-6 pb-12"
         data-aos="fade-up"
         data-aos-ease="ease"
         data-aos-duration="1000"
@@ -173,7 +173,7 @@ const monoxideAcronyms = [
     </div>
   </div>
   <div class="bg-violet-900 dark:bg-stone-700 transition-color">
-    <div class="relative py-16">
+    <div class="relative py-2 md:py-20">
       <div
         class="hidden absolute top-0 inset-x-0 h-1/2 bg-transparent lg:block"
         aria-hidden="true"
@@ -206,7 +206,7 @@ const monoxideAcronyms = [
             data-aos-ease="ease"
             data-aos-duration="1000"
             data-aos-delay="200"
-            class="relative -mt-24 md:-mt-0 pt-24 md:pt-0 bg-violet-200 shadow-2xl dark:bg-stone-800 lg:col-start-3 lg:row-start-1 lg:col-span-10 lg:rounded-xl lg:grid lg:grid-cols-10 lg:items-center"
+            class="relative -mt-24 md:-mt-10 pt-24 md:pt-0 bg-violet-200 shadow-2xl dark:bg-stone-800 lg:col-start-3 lg:row-start-1 lg:col-span-10 lg:rounded-xl lg:grid lg:grid-cols-10 lg:items-center"
           >
             <div
               class="relative max-w-md mx-auto py-12 px-8 space-y-6 sm:max-w-3xl sm:py-16 sm:px-6 lg:max-w-none lg:p-0 lg:col-start-4 lg:col-span-6"
