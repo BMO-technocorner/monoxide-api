@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "~/modules/google-fonts",
     "nuxt-typed-router",
     "@nuxtjs/tailwindcss",
+    "@nuxt-modules/compression",
   ],
   colorMode: {
     classSuffix: "",
@@ -24,6 +25,9 @@ export default defineNuxtConfig({
         ital: [300, 400, 600, 700, 800],
       },
     },
+  },
+  compression: {
+    algorithm: "brotliCompress",
   },
   typescript: {
     strict: true,
