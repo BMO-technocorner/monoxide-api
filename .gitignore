@@ -92,6 +92,8 @@ out
 .nuxt
 .output
 dist
+generated
+plugin/__typed-router.*
 assets/fonts
 assets/styles/fonts*
 
