@@ -32,7 +32,10 @@ jobs:
       - name: 🔨 Build Project
         run: npm run build
         env:
+          APP_NAME: Monoxide API
+          APP_DESCRIPTION: Monoxide Ecosystem's mobile-optimized frontend that took all the right vitamins.
           NITRO_PRESET: cloudflare
+          MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
 
       - name: 📤 Publish to Cloudflare
         uses: cloudflare/wrangler-action@1.3.0
