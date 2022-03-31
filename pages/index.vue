@@ -220,9 +220,9 @@ const monoxideAcronyms = [
               <p
                 class="text-lg text-gray-900 dark:text-gray-100 transition-color"
               >
-                Monoxide is a Cloud-based IoT integrated system project for
-                lethal gas substance prevention. This project was initially
-                developed for an IoT competition.
+                Monoxide is a Cloud-based IoT integrated system for lethal gas
+                substance prevention. This project was initially developed for
+                an IoT competition.
               </p>
               <a
                 class="block w-full py-2 px-6 text-center bg-violet-600 border-violet-700 font-extrabold text-md rounded-lg shadow text-gray-100 active:bg-violet-800 sm:inline-block sm:w-auto hover:scale-105 active:scale-95 transition disabled:cursor-not-allowed"
