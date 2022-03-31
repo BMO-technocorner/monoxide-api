@@ -1,6 +1,3 @@
-<a href="https://github.com/BMO-technocorner/monoxide-api/actions/workflows/cloudflare.yml">
-  <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/Cloudflare%20Deployment?label=build" alt="Build"/>
-</a>
 <a href="https://github.com/BMO-technocorner/monoxide-api/actions/workflows/codeql-analysis.yml">
   <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/CodeQL?label=security" alt="Security Analysis"/>
 </a>

@@ -1,9 +1,3 @@
 {
-  "compilerOptions": {
-    "module": "esnext", // required!, needs to be ES6, ES2015, ES2020, ESNext, if not set errors with "ReferenceError: exports is not defined"
-    "moduleResolution": "node", // required!
-    "esModuleInterop": true, // required!
-    "strict": true // optional but recommended
-  },
   "extends": "./.nuxt/tsconfig.json"
 }
