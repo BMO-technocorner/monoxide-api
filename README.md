@@ -15,6 +15,6 @@
 
 A brain behind The Monoxide Ecosystem.
 
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Monoxide&uri=https%3A%2F%2Fapi-monoxide.ezralazuardy.com%2FMonoxide.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Monoxide&uri=https%3A%2F%2Fapi-monoxide.ezralazuardy.com%2Fv1%2FMonoxide.json)
 
 > Written in [Typescript](https://www.typescriptlang.org) using [Nuxt](https://v3.nuxtjs.org) and [Vue](https://vuejs.org).

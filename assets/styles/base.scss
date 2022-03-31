@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "aos/dist/aos.css";
+
+/**
+ * https://stackoverflow.com/questions/25704650/disable-blue-highlight-when-touch-press-object-with-cursorpointer
+ */
+button,
+textarea,
+input,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/**
+ * https://github.com/quelchx/vue-writer
+ */
+.is-typed span.cursor,
+.is-typed span.underscore {
+  background-color: black;
+  animation: blink-black 1s infinite;
+}
+
+.dark .is-typed span.cursor,
+.dark .is-typed span.underscore {
+  background-color: white;
+  animation: blink-white 1s infinite;
+}
+
+.is-typed span.cursor {
+  display: inline-block;
+  width: 3px;
+  margin-left: 8px;
+}
+
+.is-typed span.underscore {
+  display: inline-flex;
+  width: 10px;
+  height: 1px;
+  align-items: flex-end;
+}
+
+.is-typed span.cursor.typing {
+  animation: none;
+}
+
+@keyframes blink-black {
+  49% {
+    background-color: black;
+  }
+  50% {
+    background-color: transparent;
+  }
+  99% {
+    background-color: transparent;
+  }
+}
+
+@keyframes blink-white {
+  49% {
+    background-color: white;
+  }
+  50% {
+    background-color: transparent;
+  }
+  99% {
+    background-color: transparent;
+  }
+}

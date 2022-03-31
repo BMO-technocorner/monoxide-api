@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-03-30T14:31:45.524Z",
+  "__export_date": "2022-03-31T03:27:04.007Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -9,7 +9,7 @@
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
       "modified": 1648625895277,
       "created": 1648625895277,
-      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/users",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/devices",
       "name": "Get All Users",
       "description": "",
       "method": "GET",
