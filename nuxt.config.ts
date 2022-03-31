@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     APP_DESCRIPTION: process.env.APP_DESCRIPTION,
   },
   privateRuntimeConfig: {
-    MONGO_DB_URL: process.env.MONGO_DB_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   compilerOptions: {
     types: ["@nuxt/types", "@types/aos"],

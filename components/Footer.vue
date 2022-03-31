@@ -3,7 +3,9 @@
     <div
       class="flex flex-wrap flex-col lg:flex-row py-6 max-w-7xl mx-auto px-6"
     >
-      <p class="text-gray-900 dark:text-gray-100 text-md text-center lg:text-left">
+      <p
+        class="text-gray-900 dark:text-gray-100 text-md text-center lg:text-left"
+      >
         © 2022 —
         <NuxtLink
           to="https://github.com/BMO-technocorner"
