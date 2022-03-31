@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "dev": "nuxi dev",
-    "build": "npm run aurora && npm run lint && nuxi build",
+    "build": "npm run aurora && nuxi build && npm run lint",
     "preview": "nuxi preview",
     "lint": "npm run format && npm run check",
     "format": "prettier --write .",
