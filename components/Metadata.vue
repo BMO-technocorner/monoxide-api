@@ -31,7 +31,7 @@ const config = useRuntimeConfig();
       />
     </Head>
     <Body
-      class="overflow-x-hidden scrollbar-thin scrollbar-thumb-violet-400 scrollbar-track-gray-500 min-h-screen"
+      class="overflow-x-hidden scrollbar-thin scrollbar-thumb-violet-600 scrollbar-track-gray-500 min-h-screen"
     >
       <slot />
     </Body>

@@ -92,7 +92,7 @@ const monoxideAcronyms = [
     </div>
     <div class="relative pt-6 pb-16 sm:pb-24">
       <div
-        class="flex justify-end max-w-7xl mx-auto px-4 sm:px-6 mt-6 sm:mt-16"
+        class="flex justify-start max-w-7xl mx-auto px-4 sm:px-6 mt-6 sm:mt-16"
       >
         <span data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
           <ThemeToggler />
