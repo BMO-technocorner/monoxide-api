@@ -1,3 +1,6 @@
+<a href="https://app.netlify.com/sites/api-monoxide/deploys">
+  <img src="https://api.netlify.com/api/v1/badges/c41dd99f-2f6c-4ad6-aa7d-07955617c771/deploy-status" alt="Build"/>
+</a>
 <a href="https://github.com/BMO-technocorner/monoxide-api/actions/workflows/codeql-analysis.yml">
   <img src="https://img.shields.io/github/workflow/status/BMO-technocorner/monoxide-api/CodeQL?label=security" alt="Security Analysis"/>
 </a>
