@@ -91,7 +91,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 .output
-dist
+./dist
 assets/fonts
 assets/styles/fonts*
 
