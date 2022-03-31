@@ -1,0 +1,27 @@
+model Room {
+  id        Int      @id @default(autoincrement())
+  name      String
+  owner     User?    @relation(fields: [ownerId], references: [id])
+  ownerId   Int?
+  devices   Device[]
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@index([ownerId])
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  devices Device[]
+  rooms   Room[]
+}
+
+model Device {
+  id      Int   @id @default(autoincrement())
+  owner   User? @relation(fields: [ownerId], references: [id])
+  ownerId Int?
+  room    Room? @relation(fields: [roomId], references: [id])
+  roomId  Int?
+
+  @@index([ownerId, roomId])
+}
