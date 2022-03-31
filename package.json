@@ -19,8 +19,8 @@
     "vue"
   ],
   "scripts": {
-    "dev": "npm run aurora && nuxi dev",
-    "build": "npm run aurora && nuxi build && npm run lint",
+    "dev": "npm run aurora && npm run prisma && nuxi dev",
+    "build": "npm run aurora && npm run prisma && nuxi build && npm run lint",
     "preview": "nuxi preview",
     "lint": "npm run format && npm run check",
     "format": "prettier --write .",
