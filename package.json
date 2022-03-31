@@ -25,7 +25,8 @@
     "format": "prettier --write .",
     "check": "prettier --check .",
     "prepare": "husky install && husky add .husky/pre-commit 'npm run build'",
-    "start": "node .output/server/index.mjs"
+    "start": "node .output/server/index.mjs",
+    "aurora": "mkdir -p prisma/dist && aurora"
   },
   "devDependencies": {
     "@heroicons/vue": "^1.0.6",
@@ -43,6 +44,7 @@
     "nuxt3": "^3.0.0-27478517.9c2e208",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
+    "prisma-aurora": "^1.3.5",
     "sass": "^1.49.10",
     "tailwind-scrollbar": "^1.3.1",
     "typescript": "^4.6.3",

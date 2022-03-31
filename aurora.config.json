@@ -1,0 +1,4 @@
+{
+  "files": ["prisma/*.prisma"],
+  "output": "prisma/dist/schema.prisma"
+}

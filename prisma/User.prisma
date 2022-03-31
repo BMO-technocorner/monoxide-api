@@ -1,0 +1,22 @@
+enum Role {
+  CLIENT
+  GUARD
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(CLIENT)
+  devices   Device[]
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model Device {
+  id       Int       @id @default(autoincrement())
+  owner    User?     @relation(fields: [ownerId], references: [id])
+  ownerId  Int?
+  @@index([ownerId])
+}

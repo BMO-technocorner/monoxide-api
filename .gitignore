@@ -157,3 +157,6 @@ assets/styles/fonts*
 
 # Husky
 .husky
+
+# Prisma
+prisma/dist
