@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "author": "Monoxide <ezralazuardy@students.undip.ac.id>",
   "license": "MIT",
+  "type": "commonjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/BMO-technocorner/monoxide-api"
@@ -18,7 +19,7 @@
     "vue"
   ],
   "scripts": {
-    "dev": "nuxi dev",
+    "dev": "npm run aurora && nuxi dev",
     "build": "npm run aurora && nuxi build && npm run lint",
     "preview": "nuxi preview",
     "lint": "npm run format && npm run check",
@@ -26,6 +27,7 @@
     "check": "prettier --check .",
     "prepare": "husky install && husky add .husky/pre-commit 'npm run build'",
     "start": "node .output/server/index.mjs",
+    "prisma": "npx prisma generate --schema=prisma/dist/schema.prisma",
     "aurora": "npx prisma-aurora"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/color-mode": "^3.0.2",
     "@nuxtjs/tailwindcss": "^5.0.2",
+    "@prisma/client": "^3.11.1",
     "@types/aos": "^3.0.4",
     "aos": "^2.3.4",
     "autoprefixer": "^10.4.4",
