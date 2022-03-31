@@ -154,7 +154,7 @@ const monoxideAcronyms = [
       <div class="absolute inset-0 flex flex-col" aria-hidden="true">
         <div class="flex-1" />
         <div
-          class="flex-1 w-full bg-violet-900 dark:bg-stone-700 transition-color"
+          class="flex-1 w-full bg-violet-900 dark:bg-stone-800 transition-color"
         />
       </div>
       <div
@@ -172,14 +172,14 @@ const monoxideAcronyms = [
       </div>
     </div>
   </div>
-  <div class="bg-violet-900 dark:bg-stone-700 transition-color">
+  <div class="bg-violet-900 dark:bg-stone-800 transition-color">
     <div class="relative py-2 md:py-20">
       <div
         class="hidden absolute top-0 inset-x-0 h-1/2 bg-transparent lg:block"
         aria-hidden="true"
       />
       <div
-        class="max-w-7xl mx-auto bg-violet-900 dark:bg-stone-700 lg:bg-transparent lg:px-5"
+        class="max-w-7xl mx-auto bg-violet-900 dark:bg-stone-800 lg:bg-transparent lg:px-5"
       >
         <div class="lg:grid lg:grid-cols-12">
           <div
@@ -206,7 +206,7 @@ const monoxideAcronyms = [
             data-aos-ease="ease"
             data-aos-duration="1000"
             data-aos-delay="200"
-            class="relative -mt-24 md:-mt-10 pt-24 md:pt-0 bg-violet-200 shadow-2xl dark:bg-stone-800 lg:col-start-3 lg:row-start-1 lg:col-span-10 lg:rounded-xl lg:grid lg:grid-cols-10 lg:items-center"
+            class="relative -mt-24 md:-mt-10 pt-24 md:pt-0 bg-violet-200 shadow-2xl dark:bg-stone-900 lg:col-start-3 lg:row-start-1 lg:col-span-10 lg:rounded-xl lg:grid lg:grid-cols-10 lg:items-center"
           >
             <div
               class="relative max-w-md mx-auto py-12 px-8 space-y-6 sm:max-w-3xl sm:py-16 sm:px-6 lg:max-w-none lg:p-0 lg:col-start-4 lg:col-span-6"
@@ -224,14 +224,13 @@ const monoxideAcronyms = [
                 substance prevention. This project was initially developed for
                 an IoT competition.
               </p>
-              <a
-                class="block w-full py-2 px-6 text-center bg-violet-600 border-violet-700 font-extrabold text-md rounded-lg shadow text-gray-100 active:bg-violet-800 sm:inline-block sm:w-auto hover:scale-105 active:scale-95 transition disabled:cursor-not-allowed"
-                href="#"
+              <button
+                class="block w-full py-2 px-6 text-center bg-violet-600 font-extrabold text-md rounded-lg shadow text-gray-100 active:bg-violet-800 sm:inline-block sm:w-auto hover:scale-105 active:scale-95 transition disabled:cursor-not-allowed disabled:bg-violet-800"
                 title="Documentation is in progress..."
                 disabled
               >
                 Show Details
-              </a>
+              </button>
             </div>
           </div>
         </div>
