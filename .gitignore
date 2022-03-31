@@ -156,7 +156,4 @@ assets/styles/fonts*
 .ionide
 
 # Husky
-.husky
-
-# Prisma
-prisma/dist
+.Husky
