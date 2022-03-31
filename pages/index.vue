@@ -16,6 +16,7 @@ const monoxideAcronyms = [
   "Architecture",
   "Project",
   "Masterpiece",
+  "Platform",
   "System",
 ].map((word) => ` ${word}`);
 </script>

@@ -24,7 +24,7 @@
     "lint": "npm run format && npm run check",
     "format": "prettier --write .",
     "check": "prettier --check .",
-    "prepare": "husky install && husky add .husky/pre-commit 'npm run lint'",
+    "prepare": "husky install && husky add .husky/pre-commit 'npm run build'",
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
