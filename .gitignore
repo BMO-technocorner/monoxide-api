@@ -92,6 +92,8 @@ out
 .nuxt
 .output
 dist
+assets/fonts
+assets/styles/fonts*
 
 # Gatsby files
 .cache/
