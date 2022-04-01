@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-01T00:42:01.905Z",
+  "__export_date": "2022-04-01T03:39:32.087Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -70,12 +70,12 @@
       "modified": 1648768507204,
       "created": 1648768507204,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signup",
-      "name": "Sign Up New Client",
+      "name": "Sign Up as Client",
       "description": "",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"ezra@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+        "text": "{\n\t\"email\": \"ezra@email.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"Ezra Lazuardy\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -107,7 +107,110 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1648625895327,
+      "metaSortKey": -1648625895427,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a58342d6e3734eee9cc8109b9a8dc248",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648776499973,
+      "created": 1648776499973,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signin",
+      "name": "Sign In as Client",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"ezra@email.com\",\n\t\"password\": \"12345678\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1648625895377,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_161253b9da1245bb8a08024958f72869",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648783591638,
+      "created": 1648783591638,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/profile",
+      "name": "View User Profile",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1648625895302,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -125,7 +228,7 @@
       "name": "Base Environment",
       "data": {
         "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
-        "MONOXIDE_BEARER_TOKEN": ""
+        "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJpYXQiOjE2NDg3ODI1NzEsImV4cCI6MTY3OTg4NjU3MX0.5Y97MAIrMKb4wLp6wPSKmyKlkkwLB0QzzO9AZLpCrRY"
       },
       "dataPropertyOrder": {
         "&": [
