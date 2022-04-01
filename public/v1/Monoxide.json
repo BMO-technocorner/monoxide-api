@@ -231,10 +231,7 @@
         "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJpYXQiOjE2NDg3ODI1NzEsImV4cCI6MTY3OTg4NjU3MX0.5Y97MAIrMKb4wLp6wPSKmyKlkkwLB0QzzO9AZLpCrRY"
       },
       "dataPropertyOrder": {
-        "&": [
-          "MONOXIDE_API_KEY",
-          "MONOXIDE_BEARER_TOKEN"
-        ]
+        "&": ["MONOXIDE_API_KEY", "MONOXIDE_BEARER_TOKEN"]
       },
       "color": null,
       "isPrivate": false,
@@ -271,10 +268,7 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": [
-          "API_URL",
-          "API_VERSION"
-        ]
+        "&": ["API_URL", "API_VERSION"]
       },
       "color": "#cb7167",
       "isPrivate": false,
@@ -292,10 +286,7 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": [
-          "API_URL",
-          "API_VERSION"
-        ]
+        "&": ["API_URL", "API_VERSION"]
       },
       "color": "#7d69cb",
       "isPrivate": false,

@@ -1,5 +1,4 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { createError } from "h3";
 import { useTokenPayloadID } from "~/helpers/jwt";
 import { usePrisma } from "~/helpers/prisma";
 
