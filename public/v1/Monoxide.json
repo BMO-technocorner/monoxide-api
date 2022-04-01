@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-03-31T03:27:04.007Z",
+  "__export_date": "2022-04-01T00:42:01.905Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -10,12 +10,39 @@
       "modified": 1648625895277,
       "created": 1648625895277,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/devices",
-      "name": "Get All Users",
+      "name": "Get All Devices",
       "description": "",
       "method": "GET",
       "body": {},
       "parameters": [],
-      "headers": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
       "authentication": {},
       "metaSortKey": -1648625895277,
       "isPrivate": false,
@@ -38,13 +65,74 @@
       "_type": "workspace"
     },
     {
+      "_id": "req_1840fb9450db49f59e1219d1c558944a",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648768507204,
+      "created": 1648768507204,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signup",
+      "name": "Sign Up New Client",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"ezra@gmail.com\",\n\t\"password\": \"12345678\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1648625895327,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
       "_id": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
       "modified": 1648625650386,
       "created": 1648625650386,
       "name": "Base Environment",
-      "data": {},
-      "dataPropertyOrder": {},
+      "data": {
+        "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
+        "MONOXIDE_BEARER_TOKEN": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "MONOXIDE_API_KEY",
+          "MONOXIDE_BEARER_TOKEN"
+        ]
+      },
       "color": null,
       "isPrivate": false,
       "metaSortKey": 1648625650386,
@@ -80,11 +168,35 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
+      },
+      "color": "#cb7167",
+      "isPrivate": false,
+      "metaSortKey": 1648625763046,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_3993d11afffd42558c67354e18ba45c0",
+      "parentId": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
+      "modified": 1648765932057,
+      "created": 1648765932057,
+      "name": "Monoxide Development",
+      "data": {
+        "API_URL": "http://localhost:3000",
+        "API_VERSION": "v1"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#7d69cb",
       "isPrivate": false,
-      "metaSortKey": 1648625763046,
+      "metaSortKey": 1648765932057,
       "_type": "environment"
     }
   ]

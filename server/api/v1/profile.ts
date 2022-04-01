@@ -7,9 +7,8 @@ async function onGET(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  return await prisma.device.findMany({
-    take: 20,
-  });
+  // @ts-ignore
+  return req.user ?? {};
 }
 
 export default withHTTPMethod({ onGET });

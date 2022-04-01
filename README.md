@@ -19,4 +19,4 @@ A brain behind The Monoxide Ecosystem.
 
 ![image](https://user-images.githubusercontent.com/24422019/161047593-0ba0604a-c7df-4ed9-9bef-64e48c2bb561.png)
 
-> Written in [Typescript](https://www.typescriptlang.org) using [Nuxt](https://v3.nuxtjs.org) and [Vue](https://vuejs.org).
+> Written in [TypeScript](https://www.typescriptlang.org) using [Nuxt](https://v3.nuxtjs.org) and [Vue](https://vuejs.org).

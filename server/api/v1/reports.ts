@@ -1,10 +1,15 @@
 import type { IncomingMessage, ServerResponse } from "http";
-import { withHTTPMethod } from "~/helpers/useHTTPAction";
+import type { PrismaClient } from "~/helpers/prisma";
+import { withHTTPMethod } from "~/helpers/http";
 
-async function onGET(req: IncomingMessage, res: ServerResponse) {
-  return {
-    success: true,
-  };
+async function onGET(
+  req: IncomingMessage,
+  res: ServerResponse,
+  prisma: PrismaClient
+) {
+  return await prisma.device.findMany({
+    take: 20,
+  });
 }
 
 export default withHTTPMethod({ onGET });

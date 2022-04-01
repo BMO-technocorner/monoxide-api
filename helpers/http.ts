@@ -1,10 +1,11 @@
-import { defineHandle } from "h3";
-import HTTPAction from "~/models/HTTPAction";
-import HTTPMethod from "~~/models/HTTPMethod";
 import type { IncomingMessage, ServerResponse } from "http";
+import { defineHandle } from "h3";
+import { usePrisma } from "~/helpers/prisma";
+import HTTPAction from "~/models/HTTPAction";
+import HTTPMethod from "~/models/HTTPMethod";
 
 export const useHTTPAction = (req: IncomingMessage, res: ServerResponse) => {
-  return new HTTPAction(req, res);
+  return new HTTPAction(req, res, usePrisma());
 };
 
 export const withHTTPMethod = (method: Partial<HTTPMethod>) => {
