@@ -99,13 +99,13 @@ const monoxideAcronyms = [
           <ThemeToggler />
         </span>
       </div>
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-10 sm:mt-6">
+      <div class="mx-auto max-w-7xl px-8 sm:px-6 mt-10 sm:mt-6">
         <div class="text-center">
           <h1
             data-aos="zoom-in"
             data-aos-duration="1000"
             data-aos-delay="200"
-            class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-5xl md:text-6xl transition-color"
+            class="text-4xl px-2 tracking-tight font-extrabold text-gray-900 dark:text-gray-100 sm:text-5xl md:text-6xl transition-color"
           >
             <span class="block">The 🧠 behind</span>
             <span

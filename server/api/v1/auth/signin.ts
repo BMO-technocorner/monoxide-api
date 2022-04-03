@@ -17,6 +17,8 @@ async function onPOST(
       email: body.email,
     },
   });
+
+  // verify account registered
   if (!user) {
     res.statusCode = 400;
     return res.end(
@@ -48,6 +50,7 @@ async function onPOST(
       name: user.name,
       email: user.email,
       role: user.role,
+      address: user.address,
       updatedAt: user.updatedAt,
       createdAt: user.createdAt,
       token: useToken(user.id),

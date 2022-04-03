@@ -1,16 +1,29 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import { useTokenPayloadID } from "~/helpers/jwt";
 import { usePrisma } from "~/helpers/prisma";
+import { matchPath } from "~/helpers/api";
 
-export const privateApiPath = ["devices", "profile", "reports", "users"];
+export const privateClientApiPath = ["client"];
 
-export const matchPrivateApiPath = (target: string): boolean => {
-  for (let pattern of privateApiPath) if (target.includes(pattern)) return true;
-  return false;
+export const privateGuardApiPath = ["guard"];
+
+export const isClient = (user: any): boolean => {
+  return user && user.role === "CLIENT";
+};
+
+export const isGuard = (user: any): boolean => {
+  return user && user.role === "GUARD";
 };
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
-  if (!matchPrivateApiPath(String(req.url))) return;
+  if (
+    !matchPath(
+      privateClientApiPath.concat(privateGuardApiPath),
+      String(req.url)
+    )
+  ) {
+    return;
+  }
   if (
     req.headers["authorization"] &&
     req.headers["authorization"].startsWith("Bearer")
@@ -22,6 +35,22 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       const user = await prisma.user.findUnique({
         where: { id },
       });
+
+      // verify role authorization
+      if (
+        (matchPath(privateClientApiPath, String(req.url)) && !isClient(user)) ||
+        (matchPath(privateGuardApiPath, String(req.url)) && !isGuard(user))
+      ) {
+        res.statusCode = 401;
+        return res.end(
+          JSON.stringify({
+            statusCode: 401,
+            statusMessage: "Unauthorized",
+            message: "Insufficient role authorization.",
+          })
+        );
+      }
+
       if (user) {
         // @ts-ignore
         req.user = {

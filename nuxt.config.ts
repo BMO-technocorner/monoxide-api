@@ -1,13 +1,19 @@
 import { defineNuxtConfig } from "nuxt3";
 
 const serverMiddleware = [
-  // v1 API
+  // auth
   { path: "/v1/auth/signin", handler: "~/server/api/v1/auth/signin.ts" },
   { path: "/v1/auth/signup", handler: "~/server/api/v1/auth/signup.ts" },
-  { path: "/v1/devices", handler: "~/server/api/v1/devices.ts" },
-  { path: "/v1/profile", handler: "~/server/api/v1/profile.ts" },
-  { path: "/v1/reports", handler: "~/server/api/v1/reports.ts" },
-  { path: "/v1/users", handler: "~/server/api/v1/users.ts" },
+
+  // client
+  { path: "/v1/client/devices", handler: "~/server/api/v1/client/devices.ts" },
+  { path: "/v1/client/profile", handler: "~/server/api/v1/client/profile.ts" },
+  { path: "/v1/client/reports", handler: "~/server/api/v1/client/reports.ts" },
+  { path: "/v1/client/rooms", handler: "~/server/api/v1/client/rooms.ts" },
+
+  // guard
+  { path: "/v1/guard/profile", handler: "~/server/api/v1/guard/profile.ts" },
+  { path: "/v1/guard/users", handler: "~/server/api/v1/guard/users.ts" },
 ];
 
 export default defineNuxtConfig({

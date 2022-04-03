@@ -1,14 +1,14 @@
 model Device {
   id        Int      @id @default(autoincrement())
-  published Boolean  @default(false)
   name      String
-  owner     User?    @relation(fields: [ownerId], references: [id])
+  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId   Int?
-  room      Room?    @relation(fields: [roomId], references: [id])
+  room      Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId    Int?
+  reports   Report[]
   syncAt    DateTime @default(now())
-  updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([ownerId, roomId])
 }
@@ -21,9 +21,17 @@ model User {
 
 model Room {
   id      Int      @id @default(autoincrement())
-  owner   User?    @relation(fields: [ownerId], references: [id])
+  owner   User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId Int?
   devices Device[]
 
   @@index([ownerId])
+}
+
+model Report {
+  id       Int     @id @default(autoincrement())
+  device   Device? @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId Int?
+
+  @@index([deviceId])
 }

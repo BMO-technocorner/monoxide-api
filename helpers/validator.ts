@@ -9,12 +9,7 @@ export class Validation {
 
 export const useValidator = (schema: Partial<Validation>) => {
   if (!schema.rules || schema.rules === "") return;
-  if (!schema.body || schema.body === "")
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Bad Request",
-      message: "Request body can't be empty.",
-    });
+  if (!schema.body || schema.body === "") return "Request body can't be empty.";
   const validator = new Validator();
   const check = validator.compile(schema.rules);
   return check(schema.body);

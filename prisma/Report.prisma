@@ -1,0 +1,36 @@
+enum Status {
+  OPEN
+  CLOSED
+}
+
+enum Level {
+  CLIENT
+  GUARD
+}
+
+model Report {
+  id        Int      @id @default(autoincrement())
+  message   String?
+  status    Status   @default(OPEN)
+  level     Level    @default(CLIENT)
+  device    Device?  @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId  Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([deviceId])
+}
+
+model Device {
+  id      Int      @id @default(autoincrement())
+  owner   User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId Int?
+  reports Report[]
+
+  @@index([ownerId])
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  devices Device[]
+}

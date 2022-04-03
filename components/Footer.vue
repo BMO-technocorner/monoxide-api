@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-100 dark:bg-stone-900 transition-color">
+  <footer class="bg-violet-900 dark:bg-stone-800 transition-color">
     <div
       class="flex flex-wrap flex-col lg:flex-row py-6 max-w-7xl mx-auto px-6"
     >

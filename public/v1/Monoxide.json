@@ -1,81 +1,21 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-01T03:39:32.087Z",
+  "__export_date": "2022-04-03T08:52:21.741Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
-      "_id": "req_1de5873e76ce4ad6bcc0acf80b6fa732",
-      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
-      "modified": 1648625895277,
-      "created": 1648625895277,
-      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/devices",
-      "name": "Get All Devices",
-      "description": "",
-      "method": "GET",
-      "body": {},
-      "parameters": [],
-      "headers": [
-        {
-          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
-          "name": "Accept",
-          "value": "application/json",
-          "description": ""
-        },
-        {
-          "name": "Content-Type",
-          "value": "application/json",
-          "id": "pair_4dfc4e16814040e89423374393e6110e"
-        },
-        {
-          "name": "User-Agent",
-          "value": "Insomnia",
-          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
-        },
-        {
-          "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
-          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
-        },
-        {
-          "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
-          "id": "pair_97f6f1828b22445d95a612820fadfb15"
-        }
-      ],
-      "authentication": {},
-      "metaSortKey": -1648625895277,
-      "isPrivate": false,
-      "settingStoreCookies": true,
-      "settingSendCookies": true,
-      "settingDisableRenderRequestBody": false,
-      "settingEncodeUrl": true,
-      "settingRebuildPath": true,
-      "settingFollowRedirects": "global",
-      "_type": "request"
-    },
-    {
-      "_id": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
-      "parentId": null,
-      "modified": 1648625650380,
-      "created": 1648625650380,
-      "name": "Monoxide",
-      "description": "REST API Documentation for Monoxide API",
-      "scope": "collection",
-      "_type": "workspace"
-    },
-    {
       "_id": "req_1840fb9450db49f59e1219d1c558944a",
-      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "parentId": "fld_6665e6d911e44480a4e239f2e1d98727",
       "modified": 1648768507204,
       "created": 1648768507204,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signup",
-      "name": "Sign Up as Client",
-      "description": "",
+      "name": "Sign Up New Account",
+      "description": "**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body:**\n```bash\nEmail\nPassword\nName\nAddress\n```\n\nThis endpoint is used to create a new user account. The created user account will be bound to the **Client** role only. It's recommended to use the Sign In endpoint after signin up a new account in order to generate the user bearer token.\n\nSystem will not return the `password` attribute, which by default is hashed for security purpose.",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"ezra@email.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"Ezra Lazuardy\"\n}"
+        "text": "{\n\t\"email\": \"ezra@email.com\",\n\t\"password\": \"12345678\",\n\t\"name\": \"Ezra Lazuardy\",\n\t\"address\": \"Indonesia\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -107,7 +47,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1648625895427,
+      "metaSortKey": 100,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -118,13 +58,35 @@
       "_type": "request"
     },
     {
-      "_id": "req_a58342d6e3734eee9cc8109b9a8dc248",
+      "_id": "fld_6665e6d911e44480a4e239f2e1d98727",
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648969777898,
+      "created": 1648969777898,
+      "name": "Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 0,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "parentId": null,
+      "modified": 1648625650380,
+      "created": 1648625650380,
+      "name": "Monoxide",
+      "description": "REST API Documentation for Monoxide API",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_a58342d6e3734eee9cc8109b9a8dc248",
+      "parentId": "fld_6665e6d911e44480a4e239f2e1d98727",
       "modified": 1648776499973,
       "created": 1648776499973,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signin",
-      "name": "Sign In as Client",
-      "description": "",
+      "name": "Sign In Existing Account",
+      "description": "**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body:**\n```bash\nEmail\nPassword\n```\n\nThis endpoint used to generate a new user bearer token that can simulate a Sign In / Log In workflow in the app. The generated user token will be authorized with **CLIENT** role only.",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -160,7 +122,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1648625895377,
+      "metaSortKey": 0,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -171,13 +133,373 @@
       "_type": "request"
     },
     {
-      "_id": "req_161253b9da1245bb8a08024958f72869",
+      "_id": "req_9114b97fbf834278b7694b93cb127030",
+      "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
+      "modified": 1648969727940,
+      "created": 1648969727940,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
+      "name": "Get All Client's Room",
+      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip\ntake\n```\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_fa1f51dac20343228f70bc76b3c99c8c",
+          "name": "skip",
+          "value": "0",
+          "description": ""
+        },
+        {
+          "id": "pair_abc1acee78ae474eb0745e640cc17801",
+          "name": "take",
+          "value": "15",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 200,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_c7abfd300328464a9a7dcab3c5a84b10",
+      "parentId": "fld_f7f13860d7e74a809920f8a379006c24",
+      "modified": 1648969792122,
+      "created": 1648969792122,
+      "name": "Room",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_f7f13860d7e74a809920f8a379006c24",
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648969851066,
+      "created": 1648969851066,
+      "name": "Client",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_70d4ff642e4e415ba10da246c1d07ddf",
+      "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
+      "modified": 1648969742302,
+      "created": 1648969742302,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
+      "name": "Add New Client Room",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Room A\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_e103555497d648c59aa3072d09f165d9",
+      "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
+      "modified": 1648969762957,
+      "created": 1648969762957,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms?id=6",
+      "name": "Update Existing Client's Room",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"name\": \"Room AA\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d334a369047e40b6b6867bd7da42f850",
+      "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
+      "modified": 1648974370607,
+      "created": 1648974370607,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms?id=6",
+      "name": "Delete Existing Client's Room",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_1de5873e76ce4ad6bcc0acf80b6fa732",
+      "parentId": "fld_15dcf0505ca6424aa1af8173a899f5dd",
+      "modified": 1648625895277,
+      "created": 1648625895277,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
+      "name": "Get All Client's Devices",
+      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip\ntake\n```\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_88946937f94f4ab5b73eba0eb6e343ac",
+          "name": "skip",
+          "value": "0",
+          "description": ""
+        },
+        {
+          "id": "pair_b04d2ba13266499b90de47bf0fde22df",
+          "name": "take",
+          "value": "15",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_15dcf0505ca6424aa1af8173a899f5dd",
+      "parentId": "fld_f7f13860d7e74a809920f8a379006c24",
+      "modified": 1648969814816,
+      "created": 1648969814816,
+      "name": "Device",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 0,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_161253b9da1245bb8a08024958f72869",
+      "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
       "modified": 1648783591638,
       "created": 1648783591638,
-      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/profile",
-      "name": "View User Profile",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile",
+      "name": "View Client's Profile",
+      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\nThis endpoint is used to view the client user profile.",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_6a9307a53f6f4150a14f307320ccb3ff",
+      "parentId": "fld_f7f13860d7e74a809920f8a379006c24",
+      "modified": 1648970274095,
+      "created": 1648970274095,
+      "name": "Profile",
       "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c0ce9c6889c84147a534f0ed331facf3",
+      "parentId": "fld_daac444da8dc4c54bcd8e41bffb232be",
+      "modified": 1648970197281,
+      "created": 1648970197281,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/profile",
+      "name": "View Guard's Profile",
+      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\nThis endpoint is used to view the guard user profile.",
       "method": "GET",
       "body": {},
       "parameters": [],
@@ -210,7 +532,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": -1648625895302,
+      "metaSortKey": 0,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -221,6 +543,30 @@
       "_type": "request"
     },
     {
+      "_id": "fld_daac444da8dc4c54bcd8e41bffb232be",
+      "parentId": "fld_fee5e0d358a748e28f060722b4d62693",
+      "modified": 1648970291390,
+      "created": 1648970291390,
+      "name": "Profile",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 0,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_fee5e0d358a748e28f060722b4d62693",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1648970185483,
+      "created": 1648970185483,
+      "name": "Guard",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200,
+      "_type": "request_group"
+    },
+    {
       "_id": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
       "modified": 1648625650386,
@@ -228,10 +574,13 @@
       "name": "Base Environment",
       "data": {
         "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
-        "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJpYXQiOjE2NDg3ODI1NzEsImV4cCI6MTY3OTg4NjU3MX0.5Y97MAIrMKb4wLp6wPSKmyKlkkwLB0QzzO9AZLpCrRY"
+        "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY"
       },
       "dataPropertyOrder": {
-        "&": ["MONOXIDE_API_KEY", "MONOXIDE_BEARER_TOKEN"]
+        "&": [
+          "MONOXIDE_API_KEY",
+          "MONOXIDE_BEARER_TOKEN"
+        ]
       },
       "color": null,
       "isPrivate": false,
@@ -268,7 +617,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#cb7167",
       "isPrivate": false,
@@ -286,7 +638,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#7d69cb",
       "isPrivate": false,

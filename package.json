@@ -19,18 +19,18 @@
     "vue"
   ],
   "scripts": {
-    "dev": "npm run aurora && npm run prisma && nuxi dev",
-    "build": "npm run aurora && npm run prisma && nuxi build && npm run lint",
+    "dev": "npm run db:pull && nuxi dev",
+    "build": "npm run db:pull && nuxi build && npm run lint",
     "preview": "nuxi preview",
     "lint": "npm run format && npm run check",
     "format": "prettier --write .",
     "check": "prettier --check .",
     "prepare": "husky install && husky add .husky/pre-commit 'npm run build'",
     "start": "node .output/server/index.mjs",
-    "aurora": "npx prisma-aurora",
-    "prisma": "npx prisma generate --schema=prisma/dist/schema.prisma",
+    "db:compile": "npx prisma-aurora",
+    "db:generate": "npx prisma generate --schema=prisma/dist/schema.prisma",
     "db:pull": "npx prisma db pull --schema=prisma/dist/schema.prisma",
-    "db:push": "npx prisma db push --schema=prisma/dist/schema.prisma",
+    "db:push": "npm run db:compile && npx prisma db push --schema=prisma/dist/schema.prisma",
     "db:studio": "npx prisma studio --schema=prisma/dist/schema.prisma"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "husky": "^7.0.4",
     "jsonwebtoken": "^8.5.1",
     "nuxt-typed-router": "^1.1.2",
-    "nuxt3": "^3.0.0-27479058.e4956c5",
+    "nuxt3": "^3.0.0-27480376.fdd38f9",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
     "sass": "^1.49.10",

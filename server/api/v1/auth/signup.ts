@@ -4,6 +4,7 @@ import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { useHash } from "~/helpers/hash";
+import { handleServerError } from "~/helpers/api";
 
 async function onPOST(
   req: IncomingMessage,
@@ -18,6 +19,7 @@ async function onPOST(
       email: "email|normalize|max:255",
       password: "string|min:8|max:255",
       name: "string|min:2|max:255",
+      address: "string",
     },
   });
   if (validation !== true) return handleValidation(res, validation);
@@ -45,11 +47,14 @@ async function onPOST(
   // save new user
   const user = await prisma.user.create({
     data: {
-      name: String(body.name),
       email: String(body.email).toLowerCase(),
       password: String(hashesPassword),
+      name: String(body.name),
+      address: String(body.address),
     },
   });
+
+  // return data
   if (user) {
     res.statusCode = 201;
     return res.end(
@@ -58,19 +63,15 @@ async function onPOST(
         name: user.name,
         email: user.email,
         role: user.role,
+        address: user.address,
         updatedAt: user.updatedAt,
         createdAt: user.createdAt,
       })
     );
   }
-  res.statusCode = 500;
-  return res.end(
-    JSON.stringify({
-      statusCode: 500,
-      statusMessage: "Internal Server Error",
-      message: "Unknown error happened. Please try again later.",
-    })
-  );
+
+  // handle error
+  return handleServerError(res);
 }
 
 export default withHTTPMethod({ onPOST });
