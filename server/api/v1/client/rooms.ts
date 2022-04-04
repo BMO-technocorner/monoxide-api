@@ -3,7 +3,7 @@ import type { PrismaClient } from "~/helpers/prisma";
 import { useQuery, useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
-import { handleServerError, usePaginate } from "~/helpers/api";
+import { handleServerError, usePaginate, useIdentifier } from "~/helpers/api";
 
 async function onGET(
   req: IncomingMessage,
@@ -18,8 +18,15 @@ async function onGET(
     skip,
     take,
     where: {
-      // @ts-ignore
-      ownerId: req.user.id,
+      ownerId: (req as any).user.id,
+    },
+    orderBy: [{ name: "asc" }],
+    include: {
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
 }
@@ -39,15 +46,18 @@ async function onPOST(
   });
   if (validation !== true) return handleValidation(res, validation);
 
-  // save new room
+  // save room
   const room = await prisma.room.create({
     data: {
-      // @ts-ignore
-      ownerId: req.user.id,
+      ownerId: (req as any).user.id,
       name: body.name,
     },
     include: {
-      owner: true,
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
 
@@ -74,9 +84,6 @@ async function onPUT(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request param
-  const param = await useQuery(req);
-
   // validate request body
   const body = await useBody(req);
   const validation = useValidator({
@@ -87,17 +94,25 @@ async function onPUT(
   });
   if (validation !== true) return handleValidation(res, validation);
 
-  // check if room exist
+  // validate request param identifier
+  const id = await useIdentifier(req);
+
+  // verify room id
   const room = await prisma.room.findUnique({
     where: {
-      id: parseInt(String(param.id) ?? 0),
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
-      owner: true,
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
-
-  // verify room registered
   if (!room) {
     res.statusCode = 404;
     return res.end(
@@ -105,19 +120,6 @@ async function onPUT(
         statusCode: 404,
         statusMessage: "Not Found",
         message: "There is no room with this identifier.",
-      })
-    );
-  }
-
-  // verify room owner
-  // @ts-ignore
-  if (room.ownerId !== req.user.id) {
-    res.statusCode = 401;
-    return res.end(
-      JSON.stringify({
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "The user is not authorized to update the requested room.",
       })
     );
   }
@@ -125,27 +127,39 @@ async function onPUT(
   // update data
   const updatedRoom = await prisma.room.update({
     where: {
-      id: room.id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     data: {
       name: body.name,
     },
     include: {
-      owner: true,
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
 
   // return data
-  res.statusCode = 200;
-  return res.end(
-    JSON.stringify({
-      id: updatedRoom.id,
-      name: updatedRoom.name,
-      createdAt: updatedRoom.createdAt,
-      updatedAt: updatedRoom.updatedAt,
-      owner: updatedRoom.owner,
-    })
-  );
+  if (updatedRoom) {
+    res.statusCode = 200;
+    return res.end(
+      JSON.stringify({
+        id: updatedRoom.id,
+        name: updatedRoom.name,
+        createdAt: updatedRoom.createdAt,
+        updatedAt: updatedRoom.updatedAt,
+        owner: updatedRoom.owner,
+      })
+    );
+  }
+
+  // handle error
+  return handleServerError(res);
 }
 
 async function onDELETE(
@@ -153,20 +167,25 @@ async function onDELETE(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request param
-  const param = await useQuery(req);
+  // validate request param identifier
+  const id = await useIdentifier(req);
 
-  // check if room exist
+  // verify room id
   const room = await prisma.room.findUnique({
     where: {
-      id: parseInt(String(param.id) ?? 0),
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
-      owner: true,
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
-
-  // verify room registered
   if (!room) {
     res.statusCode = 404;
     return res.end(
@@ -178,42 +197,42 @@ async function onDELETE(
     );
   }
 
-  // verify room owner
-  // @ts-ignore
-  if (room.ownerId !== req.user.id) {
-    res.statusCode = 401;
-    return res.end(
-      JSON.stringify({
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "The user is not authorized to delete the requested room.",
-      })
-    );
-  }
-
+  // delete room
   const deletedRoom = await prisma.room.delete({
     where: {
-      id: room.id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
-      owner: true,
+      owner: {
+        select: {
+          password: false,
+        },
+      },
     },
   });
 
   // return data
-  res.statusCode = 200;
-  return res.end(
-    JSON.stringify({
-      message: `${deletedRoom.name} has been successfully deleted.`,
-      data: {
-        id: deletedRoom.id,
-        name: deletedRoom.name,
-        createdAt: deletedRoom.createdAt,
-        updatedAt: deletedRoom.updatedAt,
-        owner: deletedRoom.owner,
-      },
-    })
-  );
+  if (deletedRoom) {
+    res.statusCode = 200;
+    return res.end(
+      JSON.stringify({
+        message: `${deletedRoom.name} has been successfully deleted.`,
+        data: {
+          id: deletedRoom.id,
+          name: deletedRoom.name,
+          createdAt: deletedRoom.createdAt,
+          updatedAt: deletedRoom.updatedAt,
+          owner: deletedRoom.owner,
+        },
+      })
+    );
+  }
+
+  // handle error
+  return handleServerError(res);
 }
 
 export default withHTTPMethod({ onGET, onPOST, onPUT, onDELETE });

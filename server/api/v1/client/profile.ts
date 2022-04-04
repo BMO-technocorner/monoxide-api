@@ -7,8 +7,7 @@ async function onGET(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // @ts-ignore
-  return req.user ?? {};
+  return (req as any).user;
 }
 
 export default withHTTPMethod({ onGET });

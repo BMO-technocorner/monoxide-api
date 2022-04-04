@@ -16,6 +16,7 @@ model Device {
   deviceSyncId Int?        @unique
   reports      Report[]
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([deviceSyncId, ownerId, roomId])
 }
 
@@ -31,6 +32,7 @@ model Room {
   ownerId Int?
   devices Device[]
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([ownerId])
 }
 

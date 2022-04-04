@@ -27,6 +27,7 @@ model Device {
   ownerId Int?
   reports Report[]
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([ownerId])
 }
 

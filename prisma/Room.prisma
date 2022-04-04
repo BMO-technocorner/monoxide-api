@@ -7,6 +7,7 @@ model Room {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([ownerId])
 }
 
@@ -23,5 +24,6 @@ model Device {
   room    Room? @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId  Int?
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([ownerId, roomId])
 }

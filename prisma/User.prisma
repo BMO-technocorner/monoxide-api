@@ -22,18 +22,20 @@ model Device {
   owner   User? @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId Int?
 
-  @@index([ownerId])
-}
-
-model Report {
-  id      Int   @id @default(autoincrement())
-  owner   User? @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId Int?
-
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([ownerId])
 }
 
 model Room {
+  id      Int   @id @default(autoincrement())
+  owner   User? @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId Int?
+
+  @@unique(fields: [id, ownerId], name: "belongsTo")
+  @@index([ownerId])
+}
+
+model Report {
   id      Int   @id @default(autoincrement())
   owner   User? @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId Int?

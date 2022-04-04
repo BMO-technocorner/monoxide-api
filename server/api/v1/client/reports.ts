@@ -12,8 +12,7 @@ async function onGET(
   // define custom db query
   let where = {
     device: {
-      // @ts-ignore
-      ownerId: req.user.id,
+      ownerId: (req as any).user.id,
     },
   };
 
@@ -22,10 +21,10 @@ async function onGET(
 
   // validate status and level query
   const param = await useQuery(req);
-  // @ts-ignore
-  if (param && param.level) where.level = String(param.level).toUpperCase();
-  // @ts-ignore
-  if (param && param.status) where.status = String(param.status).toUpperCase();
+  if (param && param.level)
+    (where as any).level = String(param.level).toUpperCase();
+  if (param && param.status)
+    (where as any).status = String(param.status).toUpperCase();
 
   // return data
   return await prisma.report.findMany({

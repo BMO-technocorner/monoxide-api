@@ -18,17 +18,23 @@ async function onGET(
     skip,
     take,
     where: {
-      // @ts-ignore
-      ownerId: req.user.id,
+      ownerId: (req as any).user.id,
     },
     orderBy: [{ name: "asc" }],
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -48,7 +54,7 @@ async function onPOST(
     body,
     rules: {
       roomId: "number|integer|positive",
-      uid: "string|min:2|max:255",
+      uid: "string|min:36|max:255",
       name: "string|min:2|max:255",
     },
   });
@@ -74,9 +80,10 @@ async function onPOST(
   // verify room id
   const room = await prisma.room.findUnique({
     where: {
-      // @ts-ignore
-      ownerId: req.user.id,
-      id: parseInt(body.roomId),
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id: parseInt(body.roomId),
+      },
     },
   });
   if (!room) {
@@ -90,11 +97,10 @@ async function onPOST(
     );
   }
 
-  // save new device
+  // save device
   const device = await prisma.device.create({
     data: {
-      // @ts-ignore
-      ownerId: req.user.id,
+      ownerId: (req as any).user.id,
       roomId: room.id,
       deviceSyncId: deviceSync.id,
       name: body.name,
@@ -102,10 +108,17 @@ async function onPOST(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -122,6 +135,7 @@ async function onPOST(
         name: device.name,
         createdAt: device.createdAt,
         updatedAt: device.updatedAt,
+        deviceSync: device.deviceSync,
         owner: device.owner,
         room: device.room,
         reports: device.reports,
@@ -155,15 +169,25 @@ async function onPUT(
   // verify device id
   const device = await prisma.device.findUnique({
     where: {
-      id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -181,25 +205,13 @@ async function onPUT(
     );
   }
 
-  // verify device owner
-  // @ts-ignore
-  if (device.ownerId !== req.user.id) {
-    res.statusCode = 401;
-    return res.end(
-      JSON.stringify({
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "The user is not authorized to update the requested device.",
-      })
-    );
-  }
-
   // verify room id
   const room = await prisma.room.findUnique({
     where: {
-      // @ts-ignore
-      ownerId: req.user.id,
-      id: parseInt(body.roomId),
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id: parseInt(body.roomId),
+      },
     },
   });
   if (!room) {
@@ -213,10 +225,13 @@ async function onPUT(
     );
   }
 
-  // update data
+  // update device
   const updatedDevice = await prisma.device.update({
     where: {
-      id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     data: {
       roomId: room.id,
@@ -225,10 +240,17 @@ async function onPUT(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -237,18 +259,23 @@ async function onPUT(
   });
 
   // return data
-  res.statusCode = 200;
-  return res.end(
-    JSON.stringify({
-      id: updatedDevice.id,
-      name: updatedDevice.name,
-      createdAt: updatedDevice.createdAt,
-      updatedAt: updatedDevice.updatedAt,
-      owner: updatedDevice.owner,
-      room: updatedDevice.room,
-      reports: updatedDevice.reports,
-    })
-  );
+  if (updatedDevice) {
+    res.statusCode = 200;
+    return res.end(
+      JSON.stringify({
+        id: updatedDevice.id,
+        name: updatedDevice.name,
+        createdAt: updatedDevice.createdAt,
+        updatedAt: updatedDevice.updatedAt,
+        owner: updatedDevice.owner,
+        room: updatedDevice.room,
+        reports: updatedDevice.reports,
+      })
+    );
+  }
+
+  // handle error
+  return handleServerError(res);
 }
 
 async function onDELETE(
@@ -262,15 +289,25 @@ async function onDELETE(
   // verify device id
   const device = await prisma.device.findUnique({
     where: {
-      id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -288,31 +325,28 @@ async function onDELETE(
     );
   }
 
-  // verify device owner
-  // @ts-ignore
-  if (device.ownerId !== req.user.id) {
-    res.statusCode = 401;
-    return res.end(
-      JSON.stringify({
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "The user is not authorized to delete the requested device.",
-      })
-    );
-  }
-
-  // delete data
+  // delete device
   const deletedDevice = await prisma.device.delete({
     where: {
-      id,
+      belongsTo: {
+        ownerId: (req as any).user.id,
+        id,
+      },
     },
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
       room: true,
+      deviceSync: true,
       reports: {
         take: 5,
         orderBy: [{ id: "desc" }],
@@ -321,21 +355,26 @@ async function onDELETE(
   });
 
   // return data
-  res.statusCode = 200;
-  return res.end(
-    JSON.stringify({
-      message: `${deletedDevice.name} has been successfully deleted.`,
-      data: {
-        id: deletedDevice.id,
-        name: deletedDevice.name,
-        createdAt: deletedDevice.createdAt,
-        updatedAt: deletedDevice.updatedAt,
-        owner: deletedDevice.owner,
-        room: deletedDevice.room,
-        reports: deletedDevice.reports,
-      },
-    })
-  );
+  if (deletedDevice) {
+    res.statusCode = 200;
+    return res.end(
+      JSON.stringify({
+        message: `${deletedDevice.name} has been successfully deleted.`,
+        data: {
+          id: deletedDevice.id,
+          name: deletedDevice.name,
+          createdAt: deletedDevice.createdAt,
+          updatedAt: deletedDevice.updatedAt,
+          owner: deletedDevice.owner,
+          room: deletedDevice.room,
+          reports: deletedDevice.reports,
+        },
+      })
+    );
+  }
+
+  // handle error
+  return handleServerError(res);
 }
 
 export default withHTTPMethod({ onGET, onPOST, onPUT, onDELETE });

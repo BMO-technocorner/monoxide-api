@@ -52,8 +52,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       }
 
       if (user) {
-        // @ts-ignore
-        req.user = {
+        (req as any).user = {
           id: user.id,
           name: user.name,
           email: user.email,

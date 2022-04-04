@@ -42,13 +42,22 @@ async function onPOST(
   }
 
   // hash password
-  const hashesPassword = await useHash(body.password);
+  const hashedPassword = await useHash(body.password);
 
   // save new user
   const user = await prisma.user.create({
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      address: true,
+      updatedAt: true,
+      createdAt: true,
+    },
     data: {
       email: String(body.email).toLowerCase(),
-      password: String(hashesPassword),
+      password: String(hashedPassword),
       name: String(body.name),
       address: String(body.address),
     },
