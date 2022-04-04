@@ -24,7 +24,13 @@ async function onGET(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },
@@ -55,7 +61,13 @@ async function onPOST(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },
@@ -108,7 +120,13 @@ async function onPUT(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },
@@ -138,7 +156,13 @@ async function onPUT(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },
@@ -181,7 +205,13 @@ async function onDELETE(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },
@@ -208,7 +238,13 @@ async function onDELETE(
     include: {
       owner: {
         select: {
-          password: false,
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          address: true,
+          updatedAt: true,
+          createdAt: true,
         },
       },
     },

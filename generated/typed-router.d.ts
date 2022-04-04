@@ -10,10 +10,10 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationOptions,
   RouteQueryAndHash,
-} from "vue-router";
-import type { TypedRouteList } from "./__routes";
+} from 'vue-router';
+import type { TypedRouteList } from './__routes';
 
-export type RouteListDecl = { index: "index" };
+export type RouteListDecl = { index: 'index' };
 
 export type TypedRouteParams = {
   index: never;
@@ -80,14 +80,14 @@ export interface TypedRouter {
   ): Promise<NavigationFailure | void | undefined>;
 }
 
-declare module "nuxt3/dist/app/nuxt" {
+declare module 'nuxt3/dist/app/nuxt' {
   export interface NuxtApp {
     $typedRouter: TypedRouter;
     $routesList: RouteListDecl;
   }
 }
 
-declare module "@vue/runtime-core" {
+declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $typedRouter: TypedRouter;
     $routesList: RouteListDecl;
