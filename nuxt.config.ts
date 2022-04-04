@@ -13,6 +13,7 @@ const serverMiddleware = [
 
   // guard
   { path: "/v1/guard/profile", handler: "~/server/api/v1/guard/profile.ts" },
+  { path: "/v1/guard/reports", handler: "~/server/api/v1/guard/reports.ts" },
   { path: "/v1/guard/users", handler: "~/server/api/v1/guard/users.ts" },
 ];
 

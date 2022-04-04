@@ -41,7 +41,7 @@ export const useIdentifier = async (req: IncomingMessage) => {
   let id = 0;
   if (param && param.id) {
     try {
-      id = parseInt(String(param.skip));
+      id = parseInt(String(param.id));
     } catch (e) {}
   }
   return id;

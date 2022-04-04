@@ -11,7 +11,7 @@ async function onPOST(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request body
+  // verify request body
   const body = await useBody(req);
   const validation = useValidator({
     body,

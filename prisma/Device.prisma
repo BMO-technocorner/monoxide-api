@@ -25,6 +25,7 @@ model User {
   id      Int      @id @default(autoincrement())
   devices Device[]
   rooms   Room[]
+  reports Report[]
 }
 
 model Room {
@@ -39,8 +40,11 @@ model Room {
 
 model Report {
   id       Int     @id @default(autoincrement())
+  owner    User?   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId  Int?
   device   Device? @relation(fields: [deviceId], references: [id], onDelete: Cascade)
   deviceId Int?
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
   @@index([deviceId])
 }

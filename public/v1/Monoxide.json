@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-04T17:18:43.657Z",
+  "__export_date": "2022-04-04T18:42:19.531Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -11,7 +11,7 @@
       "created": 1648768507204,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signup",
       "name": "Sign Up New Account",
-      "description": "**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body (JSON):**\n```bash\nemail: string|email|max:255\npassword: string|min:8|max:255\nname: string|min:2|max:255\naddress: string\n```\n\nThis endpoint is used to create a new user account. The created user account will be bound to the **Client** role only. It's recommended to use the Sign In endpoint after signin up a new account in order to generate the user bearer token.\n\nSystem will not return the `password` attribute, which by default is hashed for security purpose.",
+      "description": "> Authorizable by Everyone\n\nThis endpoint is used to create a new user account. The created user account will be bound to the **Client** role only. It's recommended to use the Sign In endpoint after signin up a new account in order to generate the user bearer token.\n\nSystem will not return the `password` attribute, which by default is hashed for security purpose.\n\n**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body (JSON):**\n```bash\nemail: string|email|max:255\npassword: string|min:8|max:255\nname: string|min:2|max:255\naddress: string\n```",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -86,11 +86,11 @@
       "created": 1648776499973,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/auth/signin",
       "name": "Sign In Existing Account",
-      "description": "**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body (JSON):**\n```bash\nemail: string|email|max:255\npassword: string|min:8|max:255\n```\n\nThis endpoint used to generate a new user bearer token that can simulate a Sign In / Log In workflow in the app. The generated user token will be authorized with **CLIENT** role only.",
+      "description": "> Authorizable by Everyone\n\nThis endpoint used to generate a new user bearer token that can simulate a Sign In / Log In workflow in the app. The generated user token will be authorized with **CLIENT** role only.\n\n**Required Headers:**\n```bash\nApi-Key\n```\n\n**Required Body (JSON):**\n```bash\nemail: string|email|max:255\npassword: string|min:8|max:255\n```",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"ezra@email.com\",\n\t\"password\": \"12345678\"\n}"
+        "text": "{\n\t\"email\": \"guard@email.com\",\n\t\"password\": \"12345678\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -139,7 +139,7 @@
       "created": 1648969727940,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
       "name": "Get All Client's Room",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -175,7 +175,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -221,7 +221,7 @@
       "created": 1648969742302,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
       "name": "Add New Client's Room",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```\n\nThis endpoint used to add a new client's room data.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to add a new client's room data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -252,7 +252,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -274,7 +274,7 @@
       "created": 1648969762957,
       "url": "",
       "name": "Update Existing Client's Room",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```\n\nThis endpoint used to update an existing client's room data.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to update an existing client's room data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```",
       "method": "PUT",
       "body": {
         "mimeType": "application/json",
@@ -312,7 +312,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -334,7 +334,7 @@
       "created": 1648974370607,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
       "name": "Delete Existing Client's Room",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\nThis endpoint used to remove an existing client's room data.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to remove an existing client's room data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```",
       "method": "DELETE",
       "body": {},
       "parameters": [
@@ -364,7 +364,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -386,7 +386,7 @@
       "created": 1648625895277,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Get All Client's Devices",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -422,7 +422,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -456,7 +456,7 @@
       "created": 1649064855755,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Add New Client's Device",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nuid string|min:36|max:255\nname: string|min:2|max:255\n```\n\nThis endpoint used to add a new client's device data.\n\n> Adding a device data will require a registered device UID.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to add a new client's device data. Adding a device data will require a registered **device UID**.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nuid string|min:36|max:255\nname: string|min:2|max:255\n```",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -487,7 +487,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -509,7 +509,7 @@
       "created": 1649065017114,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Delete Existing Client's Device",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\nThis endpoint used to remove an existing client's device data.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to remove an existing client's device data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```",
       "method": "DELETE",
       "body": {},
       "parameters": [
@@ -539,7 +539,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -561,7 +561,7 @@
       "created": 1649065118391,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Update Existing Client's Device",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nname: string|min:2|max:255\n```\n\nThis endpoint used to update an existing client's device data.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to update an existing client's device data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nname: string|min:2|max:255\n```",
       "method": "PUT",
       "body": {
         "mimeType": "application/json",
@@ -599,7 +599,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -621,7 +621,7 @@
       "created": 1648783591638,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile",
       "name": "View Client's Profile",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\nThis endpoint is used to view the client's user profile.",
+      "description": "> Authorizable by Client\n\nThis endpoint is used to view the client's user profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```",
       "method": "GET",
       "body": {},
       "parameters": [],
@@ -644,7 +644,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -678,7 +678,7 @@
       "created": 1649079221650,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/reports",
       "name": "Get All Client's Report",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\nstatus: string (all|open|accepted|closed)\nlevel: string (all|client|guard)\n```",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -692,6 +692,18 @@
           "id": "pair_b04d2ba13266499b90de47bf0fde22df",
           "name": "take",
           "value": "15",
+          "description": ""
+        },
+        {
+          "id": "pair_4e45631e38ff49439cb694c2a7853dbb",
+          "name": "status",
+          "value": "all",
+          "description": ""
+        },
+        {
+          "id": "pair_f768fbaf5ad74a7f9cb1afd4ffa0a369",
+          "name": "level",
+          "value": "all",
           "description": ""
         }
       ],
@@ -714,12 +726,12 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
       "authentication": {},
-      "metaSortKey": 250,
+      "metaSortKey": 0,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -748,7 +760,7 @@
       "created": 1648970197281,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/profile",
       "name": "View Guard's Profile",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\nThis endpoint is used to view the guard user profile.",
+      "description": "> Authorizable by Guard\n\nThis endpoint is used to view the guard user profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```",
       "method": "GET",
       "body": {},
       "parameters": [],
@@ -776,7 +788,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -812,7 +824,153 @@
       "description": "",
       "environment": {},
       "environmentPropertyOrder": null,
+      "metaSortKey": 300,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_acd20ba24efb400daa5162466bb27419",
+      "parentId": "fld_625766b75db24087be11d21e6a5ae1d4",
+      "modified": 1649093925678,
+      "created": 1649093925678,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/users",
+      "name": "Get All Client User",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_88946937f94f4ab5b73eba0eb6e343ac",
+          "name": "skip",
+          "value": "0",
+          "description": ""
+        },
+        {
+          "id": "pair_b04d2ba13266499b90de47bf0fde22df",
+          "name": "take",
+          "value": "15",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_625766b75db24087be11d21e6a5ae1d4",
+      "parentId": "fld_fee5e0d358a748e28f060722b4d62693",
+      "modified": 1649093087419,
+      "created": 1649093087419,
+      "name": "User",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
       "metaSortKey": 200,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_9452f961755948b28480790ad2a49f78",
+      "parentId": "fld_2676d767cfe74d10b5bd67948d174c05",
+      "modified": 1649093871488,
+      "created": 1649093871488,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/reports",
+      "name": "Get All Report",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the reports data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\nstatus: string (all|open|accepted|closed)\n```",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_88946937f94f4ab5b73eba0eb6e343ac",
+          "name": "skip",
+          "value": "0",
+          "description": ""
+        },
+        {
+          "id": "pair_b04d2ba13266499b90de47bf0fde22df",
+          "name": "take",
+          "value": "15",
+          "description": ""
+        },
+        {
+          "id": "pair_4e45631e38ff49439cb694c2a7853dbb",
+          "name": "status",
+          "value": "all",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_2676d767cfe74d10b5bd67948d174c05",
+      "parentId": "fld_fee5e0d358a748e28f060722b4d62693",
+      "modified": 1649093861276,
+      "created": 1649093861276,
+      "name": "Report",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100,
       "_type": "request_group"
     },
     {
@@ -823,10 +981,17 @@
       "name": "Base Environment",
       "data": {
         "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
-        "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY"
+        "MONOXIDE_CLIENT_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY",
+        "MONOXIDE_GUARD_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE2NDkwOTQxMDAsImV4cCI6MTY4MDE5ODEwMH0._u13vPaJ5ACaWDiVet38o9AqfnwRvbL-CjUmCIz9pcA",
+        "MONOXIDE_DEVICE_BEARER_TOKEN": ""
       },
       "dataPropertyOrder": {
-        "&": ["MONOXIDE_API_KEY", "MONOXIDE_BEARER_TOKEN"]
+        "&": [
+          "MONOXIDE_API_KEY",
+          "MONOXIDE_CLIENT_BEARER_TOKEN",
+          "MONOXIDE_GUARD_BEARER_TOKEN",
+          "MONOXIDE_DEVICE_BEARER_TOKEN"
+        ]
       },
       "color": null,
       "isPrivate": false,
@@ -863,7 +1028,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#cb7167",
       "isPrivate": false,
@@ -881,7 +1049,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#7d69cb",
       "isPrivate": false,

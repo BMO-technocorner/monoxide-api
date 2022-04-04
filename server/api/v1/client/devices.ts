@@ -10,7 +10,7 @@ async function onGET(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate pagination cursor
+  // verify pagination cursor
   const { skip, take } = await usePaginate(req);
 
   // return data
@@ -48,7 +48,7 @@ async function onPOST(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request body
+  // verify request body
   const body = await useBody(req);
   const validation = useValidator({
     body,
@@ -152,7 +152,7 @@ async function onPUT(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request body
+  // verify request body
   const body = await useBody(req);
   const validation = useValidator({
     body,
@@ -163,7 +163,7 @@ async function onPUT(
   });
   if (validation !== true) return handleValidation(res, validation);
 
-  // validate request param identifier
+  // get request param identifier
   const id = await useIdentifier(req);
 
   // verify device id
@@ -283,7 +283,7 @@ async function onDELETE(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request param identifier
+  // get request param identifier
   const id = await useIdentifier(req);
 
   // verify device id

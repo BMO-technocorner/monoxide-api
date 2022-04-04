@@ -11,17 +11,14 @@ async function onGET(
   prisma: PrismaClient
 ) {
   // define custom db query
-  let where = {
-    device: {
-      ownerId: (req as any).user.id,
-    },
-  };
+  let where = {};
 
   // verify pagination cursor
   const { skip, take } = await usePaginate(req);
 
   // verify status and level query
   const param = await useQuery(req);
+  (where as any).level = "GUARD";
   if (
     param &&
     param.status &&
@@ -30,13 +27,6 @@ async function onGET(
       String(param.status).toUpperCase() === "CLOSED")
   )
     (where as any).status = String(param.status).toUpperCase();
-  if (
-    param &&
-    param.level &&
-    (String(param.level).toUpperCase() === "CLIENT" ||
-      String(param.level).toUpperCase() === "GUARD")
-  )
-    (where as any).level = String(param.level).toUpperCase();
 
   // return data
   return await prisma.report.findMany({
@@ -78,7 +68,7 @@ async function onPUT(
   if (validation !== true) return handleValidation(res, validation);
 
   // verify status variant
-  if (body.status !== "ACCEPTED" && body.status !== "CLOSED") {
+  if (body.status !== "DONE" && body.status !== "CLOSED") {
     res.statusCode = 400;
     return res.end(
       JSON.stringify({
@@ -95,10 +85,7 @@ async function onPUT(
   // verify report id
   const report = await prisma.report.findUnique({
     where: {
-      belongsTo: {
-        ownerId: (req as any).user.id,
-        id,
-      },
+      id,
     },
     include: {
       owner: {
@@ -126,14 +113,26 @@ async function onPUT(
     );
   }
 
-  // verify report status
-  if (report.status !== "OPEN") {
+  // verify report level
+  if (report.level === "CLIENT") {
     res.statusCode = 400;
     return res.end(
       JSON.stringify({
         statusCode: 400,
         statusMessage: "Bad Request",
-        message: "The requested report status has been updated before.",
+        message: "Unsupported report level.",
+      })
+    );
+  }
+
+  // verify report status
+  if (report.status !== "ACCEPTED") {
+    res.statusCode = 400;
+    return res.end(
+      JSON.stringify({
+        statusCode: 400,
+        statusMessage: "Bad Request",
+        message: "The requested report status has not been accepted before.",
       })
     );
   }
@@ -141,15 +140,11 @@ async function onPUT(
   // update data
   const updatedReport = await prisma.report.update({
     where: {
-      belongsTo: {
-        ownerId: (req as any).user.id,
-        id,
-      },
+      id,
     },
     data: {
       status: body.status.toUpperCase(),
       message: body.message,
-      level: body.status.toUpperCase() === "ACCEPTED" ? "GUARD" : "CLIENT",
     },
     include: {
       owner: {

@@ -1,6 +1,8 @@
 enum Status {
   OPEN
+  ACCEPTED
   CLOSED
+  DONE
 }
 
 enum Level {
@@ -13,11 +15,15 @@ model Report {
   message   String?
   status    Status   @default(OPEN)
   level     Level    @default(CLIENT)
+  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId   Int?
   device    Device?  @relation(fields: [deviceId], references: [id], onDelete: Cascade)
   deviceId  Int?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique(fields: [id, ownerId], name: "belongsTo")
+  @@unique(fields: [id, level], name: "byLevel")
   @@index([deviceId])
 }
 
@@ -34,4 +40,5 @@ model Device {
 model User {
   id      Int      @id @default(autoincrement())
   devices Device[]
+  reports Report[]
 }

@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import type { PrismaClient } from "~/helpers/prisma";
-import { useQuery, useBody } from "h3";
+import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError, usePaginate, useIdentifier } from "~/helpers/api";
@@ -10,7 +10,7 @@ async function onGET(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate pagination cursor
+  // verify pagination cursor
   const { skip, take } = await usePaginate(req);
 
   // return data
@@ -42,7 +42,7 @@ async function onPOST(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request body
+  // verify request body
   const body = await useBody(req);
   const validation = useValidator({
     body,
@@ -96,7 +96,7 @@ async function onPUT(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request body
+  // verify request body
   const body = await useBody(req);
   const validation = useValidator({
     body,
@@ -106,7 +106,7 @@ async function onPUT(
   });
   if (validation !== true) return handleValidation(res, validation);
 
-  // validate request param identifier
+  // get request param identifier
   const id = await useIdentifier(req);
 
   // verify room id
@@ -191,7 +191,7 @@ async function onDELETE(
   res: ServerResponse,
   prisma: PrismaClient
 ) {
-  // validate request param identifier
+  // get request param identifier
   const id = await useIdentifier(req);
 
   // verify room id

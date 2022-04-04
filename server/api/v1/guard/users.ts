@@ -1,25 +1,42 @@
 import type { IncomingMessage, ServerResponse } from "http";
 import type { PrismaClient } from "~/helpers/prisma";
 import { withHTTPMethod } from "~/helpers/http";
-import { PAGINATION_AMOUNT } from "~/config/prisma";
+import { usePaginate } from "~/helpers/api";
 
 async function onGET(
   req: IncomingMessage,
   res: ServerResponse,
   prisma: PrismaClient
 ) {
+  // verify pagination cursor
+  const { skip, take } = await usePaginate(req);
+
+  // return data
   return await prisma.user.findMany({
+    skip,
+    take,
+    where: {
+      role: "CLIENT",
+    },
     select: {
       id: true,
-      email: true,
       name: true,
-      address: true,
+      email: true,
       role: true,
-      devices: true,
-      rooms: true,
-      reports: true,
+      address: true,
+      updatedAt: true,
+      createdAt: true,
+      devices: {
+        orderBy: [{ name: "asc" }],
+      },
+      rooms: {
+        orderBy: [{ name: "asc" }],
+      },
+      reports: {
+        take: 5,
+        orderBy: [{ id: "desc" }],
+      },
     },
-    take: PAGINATION_AMOUNT,
   });
 }
 
