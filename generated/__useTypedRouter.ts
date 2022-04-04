@@ -4,8 +4,8 @@
  * ---------------------
  * */
 
-import { useNuxtApp } from '#app';
-import { TypedRouter, RouteListDecl } from './typed-router';
+import { useNuxtApp } from "#app";
+import { TypedRouter, RouteListDecl } from "./typed-router";
 
 /** Returns instances of $typedRouter and $routesList fully typed to use in your components or your Vuex/Pinia store
  *
@@ -23,7 +23,7 @@ export const useTypedRouter = (): {
 } => {
   const { $router } = useNuxtApp();
 
-  const routesList = { index: 'index' };
+  const routesList = { index: "index" };
 
   return {
     router: $router,
