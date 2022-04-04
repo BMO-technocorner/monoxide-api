@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-04T15:17:52.555Z",
+  "__export_date": "2022-04-04T17:18:43.657Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -456,7 +456,7 @@
       "created": 1649064855755,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Add New Client's Device",
-      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nuid string|min:2|max:255\nname: string|min:2|max:255\n```\n\nThis endpoint used to add a new client's device data.\n\n> Adding a device data will require a registered device UID.",
+      "description": "**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nuid string|min:36|max:255\nname: string|min:2|max:255\n```\n\nThis endpoint used to add a new client's device data.\n\n> Adding a device data will require a registered device UID.",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
@@ -826,7 +826,10 @@
         "MONOXIDE_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY"
       },
       "dataPropertyOrder": {
-        "&": ["MONOXIDE_API_KEY", "MONOXIDE_BEARER_TOKEN"]
+        "&": [
+          "MONOXIDE_API_KEY",
+          "MONOXIDE_BEARER_TOKEN"
+        ]
       },
       "color": null,
       "isPrivate": false,
@@ -863,7 +866,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#cb7167",
       "isPrivate": false,
@@ -881,7 +887,10 @@
         "API_VERSION": "v1"
       },
       "dataPropertyOrder": {
-        "&": ["API_URL", "API_VERSION"]
+        "&": [
+          "API_URL",
+          "API_VERSION"
+        ]
       },
       "color": "#7d69cb",
       "isPrivate": false,
