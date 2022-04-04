@@ -19,8 +19,8 @@
     "vue"
   ],
   "scripts": {
-    "dev": "npm run db:pull && nuxi dev",
-    "build": "npm run db:pull && nuxi build && npm run lint",
+    "dev": "npm run db:pull && npm run db:generate && nuxi dev",
+    "build": "npm run db:pull && npm run db:generate && nuxi build && npm run lint",
     "preview": "nuxi preview",
     "lint": "npm run format && npm run check",
     "format": "prettier --write .",

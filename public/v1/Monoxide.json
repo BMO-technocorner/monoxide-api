@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-04T19:34:48.192Z",
+  "__export_date": "2022-04-04T20:01:45.224Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -39,11 +39,6 @@
           "name": "Api-Key",
           "value": "{{ _.MONOXIDE_API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
-        },
-        {
-          "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
-          "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
       "authentication": {},
@@ -114,11 +109,6 @@
           "name": "Api-Key",
           "value": "{{ _.MONOXIDE_API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
-        },
-        {
-          "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_BEARER_TOKEN }}",
-          "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
       "authentication": {},
