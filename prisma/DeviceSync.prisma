@@ -1,6 +1,13 @@
+model DeviceSync {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique
+  Device    Device?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Device {
   id           Int         @id @default(autoincrement())
-  name         String
   owner        User?       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId      Int?
   room         Room?       @relation(fields: [roomId], references: [id], onDelete: Cascade)
@@ -8,16 +15,8 @@ model Device {
   deviceSync   DeviceSync? @relation(fields: [deviceSyncId], references: [id], onDelete: Cascade)
   deviceSyncId Int?        @unique
   reports      Report[]
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
 
   @@index([deviceSyncId, ownerId, roomId])
-}
-
-model DeviceSync {
-  id     Int     @id @default(autoincrement())
-  uid    String  @unique
-  Device Device?
 }
 
 model User {

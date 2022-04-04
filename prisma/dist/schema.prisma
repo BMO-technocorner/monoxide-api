@@ -10,18 +10,27 @@ datasource db {
 }
 
 model Device {
-  id        Int      @id @default(autoincrement())
-  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId   Int?
-  room      Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  roomId    Int?
-  reports   Report[]
-  name      String
-  syncAt    DateTime @default(now())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int         @id @default(autoincrement())
+  owner        User?       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId      Int?
+  room         Room?       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId       Int?
+  reports      Report[]
+  deviceSync   DeviceSync? @relation(fields: [deviceSyncId], references: [id], onDelete: Cascade)
+  deviceSyncId Int?        @unique
+  name         String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 
   @@index([ownerId])
+}
+
+model DeviceSync {
+  id        Int      @id @default(autoincrement())
+  uid       String   @unique
+  Device    Device?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model User {
