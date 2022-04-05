@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-05T03:36:14.504Z",
+  "__export_date": "2022-04-05T04:31:59.395Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -450,7 +450,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"roomId\": 1,\n\t\"uid\": \"\",\n\t\"name\": \"Room A\"\n}"
+        "text": "{\n\t\"roomId\": 7,\n\t\"uid\": \"6e0dcdf1-95a5-4981-96ed-9d2291d7db16\",\n\t\"name\": \"Room A\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -719,7 +719,7 @@
       "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
       "modified": 1649129243016,
       "created": 1649129243016,
-      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile",
+      "url": "",
       "name": "Update Client's Account Profile",
       "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nemail: email|normalize|max:255\nname: string|min:2|max:255\naddress: string\n```",
       "method": "PUT",
@@ -949,7 +949,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": 100,
+      "metaSortKey": 200,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -1027,6 +1027,59 @@
       ],
       "authentication": {},
       "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d6f95bcf0dc4439a8a47825e3463fde2",
+      "parentId": "fld_daac444da8dc4c54bcd8e41bffb232be",
+      "modified": 1649129789359,
+      "created": 1649129789359,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/profile",
+      "name": "Update Guard's Account Profile",
+      "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nemail: email|normalize|max:255\nname: string|min:2|max:255\naddress: string\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"guard@email.com\",\n\t\"name\": \"Guard\",\n\t\"address\": \"Indonesia\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -1243,6 +1296,76 @@
       "_type": "request"
     },
     {
+      "_id": "req_03a70dec703d4f348543b4b398a47e3f",
+      "parentId": "fld_bbbb19a3fb4546488624810c84750d50",
+      "modified": 1649132062494,
+      "created": 1649132062494,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/device/sync",
+      "name": "Synchronize Device Uptime",
+      "description": "> Authorizable by Device\n\nThis endpoint used to synchronize the device uptime on the server. No request body is required.\n\n**Required Headers:**\n```bash\nApi-Key\nDevice-Key\n```",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "id": "pair_b5986134b97c42a9b3becc5bd2653710",
+          "name": "Device-Key",
+          "value": "{{ _.MONOXIDE_DEVICE_KEY }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 250,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_bbbb19a3fb4546488624810c84750d50",
+      "parentId": "fld_5c069e46827042d9a8c5386fd8e8bfad",
+      "modified": 1649094916059,
+      "created": 1649094916059,
+      "name": "Sync",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 100,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_5c069e46827042d9a8c5386fd8e8bfad",
+      "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
+      "modified": 1649094821032,
+      "created": 1649094821032,
+      "name": "Device",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200,
+      "_type": "request_group"
+    },
+    {
       "_id": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
       "parentId": "wrk_a4eebb0b59c349d083b7ae2f0094bc6a",
       "modified": 1648625650386,
@@ -1250,16 +1373,16 @@
       "name": "Base Environment",
       "data": {
         "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
+        "MONOXIDE_DEVICE_KEY": "6e0dcdf1-95a5-4981-96ed-9d2291d7db16",
         "MONOXIDE_CLIENT_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY",
-        "MONOXIDE_GUARD_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE2NDkwOTQxMDAsImV4cCI6MTY4MDE5ODEwMH0._u13vPaJ5ACaWDiVet38o9AqfnwRvbL-CjUmCIz9pcA",
-        "MONOXIDE_DEVICE_BEARER_TOKEN": ""
+        "MONOXIDE_GUARD_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE2NDkwOTQxMDAsImV4cCI6MTY4MDE5ODEwMH0._u13vPaJ5ACaWDiVet38o9AqfnwRvbL-CjUmCIz9pcA"
       },
       "dataPropertyOrder": {
         "&": [
           "MONOXIDE_API_KEY",
+          "MONOXIDE_DEVICE_KEY",
           "MONOXIDE_CLIENT_BEARER_TOKEN",
-          "MONOXIDE_GUARD_BEARER_TOKEN",
-          "MONOXIDE_DEVICE_BEARER_TOKEN"
+          "MONOXIDE_GUARD_BEARER_TOKEN"
         ]
       },
       "color": null,
