@@ -36,22 +36,23 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         where: { id },
       });
 
-      // verify role authorization
-      if (
-        (matchPath(privateClientApiPath, String(req.url)) && !isClient(user)) ||
-        (matchPath(privateGuardApiPath, String(req.url)) && !isGuard(user))
-      ) {
-        res.statusCode = 401;
-        return res.end(
-          JSON.stringify({
-            statusCode: 401,
-            statusMessage: "Unauthorized",
-            message: "Insufficient role authorization.",
-          })
-        );
-      }
-
       if (user) {
+        // verify role authorization
+        if (
+          (matchPath(privateClientApiPath, String(req.url)) &&
+            !isClient(user)) ||
+          (matchPath(privateGuardApiPath, String(req.url)) && !isGuard(user))
+        ) {
+          res.statusCode = 401;
+          return res.end(
+            JSON.stringify({
+              statusCode: 401,
+              statusMessage: "Unauthorized",
+              message: "Insufficient role authorization.",
+            })
+          );
+        }
+
         (req as any).user = {
           id: user.id,
           name: user.name,
