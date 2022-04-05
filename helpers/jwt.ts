@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const useSecret = () => {
-  return process.env.JWT_SECRET ?? "";
+  return String(process.env.JWT_SECRET);
 };
 
 export const useToken = (id: String | Number) => {
