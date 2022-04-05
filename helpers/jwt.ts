@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const useSecret = () => {
-  return process.env.JWT_SECRET ?? "monoxide";
+  return process.env.JWT_SECRET ?? "";
 };
 
 export const useToken = (id: String | Number) => {
