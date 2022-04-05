@@ -3,28 +3,26 @@
     <div
       class="flex flex-wrap flex-col lg:flex-row py-6 max-w-7xl mx-auto px-6"
     >
-      <p
-        class="text-gray-900 dark:text-gray-100 text-md text-center lg:text-left"
-      >
+      <p class="text-gray-100 text-md text-center lg:text-left">
         © 2022 —
         <NuxtLink
           to="https://github.com/BMO-technocorner"
           title="Organization's profile"
           target="_blank"
-          class="font-semibold hover:underline active:text-violet-500 transition"
+          class="font-semibold hover:underline active:text-violet-300 transition"
         >
           @BMO
         </NuxtLink>
       </p>
       <span
-        class="text-gray-900 dark:text-gray-100 inline-flex lg:ml-auto mt-4 lg:mt-0 justify-center lg:justify-start"
+        class="text-gray-100 inline-flex lg:ml-auto mt-4 lg:mt-0 justify-center lg:justify-start"
       >
         <a
           title="Organization's GitHub"
           href="https://github.com/BMO-technocorner"
           rel="noopener noreferrer"
           target="_blank"
-          class="active:scale-100 hover:scale-105 active:text-violet-500 flex transition"
+          class="active:scale-100 hover:scale-105 active:text-violet-300 flex transition"
         >
           <svg
             fill="currentColor"

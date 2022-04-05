@@ -51,7 +51,7 @@
     "husky": "^7.0.4",
     "jsonwebtoken": "^8.5.1",
     "nuxt-typed-router": "^1.1.2",
-    "nuxt3": "^3.0.0-27484505.9f6eff7",
+    "nuxt3": "^3.0.0-27486226.7a70644",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
     "sass": "^1.49.10",
