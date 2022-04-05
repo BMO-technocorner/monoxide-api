@@ -25,6 +25,7 @@ const serverMiddleware = [
   { path: "/v1/guard/users", handler: "~/server/api/v1/guard/users.ts" },
 
   // device
+  { path: "/v1/device/report", handler: "~/server/api/v1/device/report.ts" },
   { path: "/v1/device/sync", handler: "~/server/api/v1/device/sync.ts" },
 ];
 

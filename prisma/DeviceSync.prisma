@@ -1,7 +1,7 @@
 model DeviceSync {
   id        Int      @id @default(autoincrement())
   uid       String   @unique
-  Device    Device?
+  device    Device?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
