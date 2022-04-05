@@ -10,17 +10,24 @@ enum Level {
   GUARD
 }
 
+enum DetectionLevel {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model Report {
-  id        Int      @id @default(autoincrement())
-  message   String?
-  status    Status   @default(OPEN)
-  level     Level    @default(CLIENT)
-  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId   Int?
-  device    Device?  @relation(fields: [deviceId], references: [id], onDelete: Cascade)
-  deviceId  Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int            @id @default(autoincrement())
+  message        String?
+  status         Status         @default(OPEN)
+  level          Level          @default(CLIENT)
+  detectionLevel DetectionLevel @default(LOW)
+  owner          User?          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId        Int?
+  device         Device?        @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId       Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
   @@unique(fields: [id, ownerId], name: "belongsTo")
   @@unique(fields: [id, level], name: "byLevel")

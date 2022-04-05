@@ -6,15 +6,25 @@ const serverMiddleware = [
   { path: "/v1/auth/signup", handler: "~/server/api/v1/auth/signup.ts" },
 
   // client
-  { path: "/v1/client/devices", handler: "~/server/api/v1/client/devices.ts" },
+  {
+    path: "/v1/client/profile/reset-password",
+    handler: "~/server/api/v1/client/profile/reset-password.ts",
+  },
   { path: "/v1/client/profile", handler: "~/server/api/v1/client/profile.ts" },
+  { path: "/v1/client/devices", handler: "~/server/api/v1/client/devices.ts" },
   { path: "/v1/client/reports", handler: "~/server/api/v1/client/reports.ts" },
   { path: "/v1/client/rooms", handler: "~/server/api/v1/client/rooms.ts" },
 
   // guard
+  {
+    path: "/v1/guard/profile/reset-password",
+    handler: "~/server/api/v1/guard/profile/reset-password.ts",
+  },
   { path: "/v1/guard/profile", handler: "~/server/api/v1/guard/profile.ts" },
   { path: "/v1/guard/reports", handler: "~/server/api/v1/guard/reports.ts" },
   { path: "/v1/guard/users", handler: "~/server/api/v1/guard/users.ts" },
+
+  // device
 ];
 
 export default defineNuxtConfig({
@@ -50,6 +60,7 @@ export default defineNuxtConfig({
   privateRuntimeConfig: {
     DATABASE_URL: process.env.DATABASE_URL,
     API_KEY: process.env.API_KEY,
+    DEVICE_KEY: process.env.DEVICE_KEY,
     JWT_SECRET: process.env.JWT_SECRET,
   },
   compilerOptions: {

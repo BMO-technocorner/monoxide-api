@@ -4,14 +4,7 @@ import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError } from "~/helpers/api";
-
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
-  return (req as any).user;
-}
+import { useHash } from "~/helpers/hash";
 
 async function onPUT(
   req: IncomingMessage,
@@ -23,29 +16,14 @@ async function onPUT(
   const validation = useValidator({
     body,
     rules: {
-      email: "email|normalize|max:255",
-      name: "string|min:2|max:255",
-      address: "string",
+      password: "string|min:8|max:255",
+      confirmPassword: { type: "equal", field: "password" },
     },
   });
   if (validation !== true) return handleValidation(res, validation);
 
-  // verify email is unique
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: body.email,
-    },
-  });
-  if (existingUser && existingUser.id !== (req as any).user.id) {
-    res.statusCode = 400;
-    return res.end(
-      JSON.stringify({
-        statusCode: 400,
-        statusMessage: "Bad Request",
-        message: "The requested email is already registered.",
-      })
-    );
-  }
+  // hash password
+  const hashedPassword = await useHash(body.password);
 
   // update user
   const updatedUser = await prisma.user.update({
@@ -53,9 +31,15 @@ async function onPUT(
       id: (req as any).user.id,
     },
     data: {
-      email: body.email,
-      name: body.name,
-      address: body.address,
+      password: hashedPassword,
+    },
+    include: {
+      devices: true,
+      rooms: true,
+      reports: {
+        take: 5,
+        orderBy: [{ id: "desc" }],
+      },
     },
   });
 
@@ -70,6 +54,9 @@ async function onPUT(
         address: updatedUser.address,
         createdAt: updatedUser.createdAt,
         updatedAt: updatedUser.updatedAt,
+        devices: updatedUser.devices,
+        rooms: updatedUser.rooms,
+        reports: updatedUser.reports,
       })
     );
   }
@@ -78,4 +65,4 @@ async function onPUT(
   return handleServerError(res);
 }
 
-export default withHTTPMethod({ onGET, onPUT });
+export default withHTTPMethod({ onPUT });

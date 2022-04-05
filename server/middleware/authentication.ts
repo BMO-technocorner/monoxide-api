@@ -7,6 +7,8 @@ export const privateClientApiPath = ["client"];
 
 export const privateGuardApiPath = ["guard"];
 
+export const privateDeviceApiPath = ["device"];
+
 export const isClient = (user: any): boolean => {
   return user && user.role === "CLIENT";
 };
@@ -16,14 +18,32 @@ export const isGuard = (user: any): boolean => {
 };
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
+  // match private api only
   if (
     !matchPath(
-      privateClientApiPath.concat(privateGuardApiPath),
+      privateClientApiPath
+        .concat(privateGuardApiPath)
+        .concat(privateDeviceApiPath),
       String(req.url)
     )
   ) {
     return;
   }
+
+  // verify device key (device endpoint)
+  if (matchPath(privateDeviceApiPath, String(req.url))) {
+    if (req.headers["device-key"] === process.env.DEVICE_KEY) return;
+    res.statusCode = 401;
+    return res.end(
+      JSON.stringify({
+        statusCode: 401,
+        statusMessage: "Unauthorized",
+        message: "Invalid device key.",
+      })
+    );
+  }
+
+  // verify bearer token (client / guard endpoint)
   if (
     req.headers["authorization"] &&
     req.headers["authorization"].startsWith("Bearer")
@@ -53,6 +73,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
           );
         }
 
+        // save user data in request object
         (req as any).user = {
           id: user.id,
           name: user.name,

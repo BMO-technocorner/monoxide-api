@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-04T20:01:45.224Z",
+  "__export_date": "2022-04-05T03:36:14.504Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -639,7 +639,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": 0,
+      "metaSortKey": 200,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -660,6 +660,112 @@
       "environmentPropertyOrder": null,
       "metaSortKey": 100,
       "_type": "request_group"
+    },
+    {
+      "_id": "req_002ae8d4bc284d4c887dba43f15e1a30",
+      "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
+      "modified": 1649128896029,
+      "created": 1649128896029,
+      "url": "",
+      "name": "Reset Client's Account Password",
+      "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account password.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\npassword: string|min:8|max:255\nconfirmPassword: equal:password\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"password\": \"12345678\",\n\t\"confirmPassword\": \"12345678\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3c7809abe0004fbb8cf5803dc5c00e69",
+      "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
+      "modified": 1649129243016,
+      "created": 1649129243016,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile",
+      "name": "Update Client's Account Profile",
+      "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nemail: email|normalize|max:255\nname: string|min:2|max:255\naddress: string\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"email@email.com\",\n\t\"name\": \"Ezra Lazuardy\",\n\t\"address\": \"Indonesia\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
     },
     {
       "_id": "req_e41bbbb648e84655b1003e77177f139b",
@@ -843,7 +949,7 @@
         }
       ],
       "authentication": {},
-      "metaSortKey": 0,
+      "metaSortKey": 100,
       "isPrivate": false,
       "settingStoreCookies": true,
       "settingSendCookies": true,
@@ -878,13 +984,66 @@
       "_type": "request_group"
     },
     {
+      "_id": "req_754db05009554234831f3dac8002e0d4",
+      "parentId": "fld_daac444da8dc4c54bcd8e41bffb232be",
+      "modified": 1649129102919,
+      "created": 1649129102919,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/profile/reset-password",
+      "name": "Reset Guard's Account Password",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to update the guard's account password.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\npassword: string|min:8|max:255\nconfirmPassword: equal:password\n```",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"password\": \"12345678\",\n\t\"confirmPassword\": \"12345678\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_4dfc4e16814040e89423374393e6110e"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
       "_id": "req_acd20ba24efb400daa5162466bb27419",
       "parentId": "fld_625766b75db24087be11d21e6a5ae1d4",
       "modified": 1649093925678,
       "created": 1649093925678,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/users",
       "name": "Get All Client User",
-      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the client's user data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -1030,7 +1189,7 @@
       "created": 1649100633303,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/reports",
       "name": "Update Existing Report Status",
-      "description": "> Authorizable by Client\n\nThis endpoint used to update an existing report status. Report's status can only be updated once with either of these values: `DONE` or `CLOSED`.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nstatus: string|min:4|max:255\nmessage: string|optional\n```",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to update an existing report status. Report's status can only be updated once with either of these values: `DONE` or `CLOSED`.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nstatus: string|min:4|max:255\nmessage: string|optional\n```",
       "method": "PUT",
       "body": {
         "mimeType": "application/json",

@@ -62,16 +62,17 @@ model Room {
 }
 
 model Report {
-  id        Int      @id @default(autoincrement())
-  owner     User?    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  ownerId   Int?
-  message   String?
-  status    Status   @default(OPEN)
-  level     Level    @default(CLIENT)
-  device    Device?  @relation(fields: [deviceId], references: [id], onDelete: Cascade)
-  deviceId  Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             Int            @id @default(autoincrement())
+  owner          User?          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId        Int?
+  message        String?
+  status         Status         @default(OPEN)
+  level          Level          @default(CLIENT)
+  detectionLevel DetectionLevel @default(LOW)
+  device         Device?        @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  deviceId       Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
   @@unique([id, ownerId], name: "belongsTo")
   @@index([ownerId])
@@ -87,6 +88,12 @@ enum Status {
 enum Level {
   CLIENT
   GUARD
+}
+
+enum DetectionLevel {
+  LOW
+  MEDIUM
+  HIGH
 }
 
 enum Role {
