@@ -4,6 +4,6 @@
  * ---------------------
  * */
 
-export const routerPagesNames = { index: 'index' as const };
+export const routerPagesNames = { index: "index" as const };
 
-export type TypedRouteList = 'index';
+export type TypedRouteList = "index";
