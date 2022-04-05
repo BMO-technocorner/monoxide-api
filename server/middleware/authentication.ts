@@ -3,11 +3,11 @@ import { useTokenPayloadID } from "~/helpers/jwt";
 import { usePrisma } from "~/helpers/prisma";
 import { matchPath } from "~/helpers/api";
 
-export const privateClientApiPath = ["client"];
+export const privateClientApiPath = ["client/"];
 
-export const privateGuardApiPath = ["guard"];
+export const privateGuardApiPath = ["guard/"];
 
-export const privateDeviceApiPath = ["device"];
+export const privateDeviceApiPath = ["device/"];
 
 export const isClient = (user: any): boolean => {
   return user && user.role === "CLIENT";
@@ -32,15 +32,17 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 
   // verify device key (device endpoint)
   if (matchPath(privateDeviceApiPath, String(req.url))) {
-    if (req.headers["device-key"] === process.env.DEVICE_KEY) return;
-    res.statusCode = 401;
-    return res.end(
-      JSON.stringify({
-        statusCode: 401,
-        statusMessage: "Unauthorized",
-        message: "Invalid device key.",
-      })
-    );
+    if (!req.headers["device-key"] || req.headers["device-key"] === "") {
+      res.statusCode = 401;
+      return res.end(
+        JSON.stringify({
+          statusCode: 401,
+          statusMessage: "Unauthorized",
+          message: "Invalid device key.",
+        })
+      );
+    }
+    return;
   }
 
   // verify bearer token (client / guard endpoint)
