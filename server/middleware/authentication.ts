@@ -18,6 +18,10 @@ export const isGuard = (user: any): boolean => {
 };
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
+  // allow authentication on api endpoints
+  if (req.url && !req.url.includes("/api/") && !req.url.includes("/v1/"))
+    return;
+
   // match private api only
   if (
     !matchPath(
