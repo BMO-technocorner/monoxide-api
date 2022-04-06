@@ -17,6 +17,6 @@ A brain behind The Monoxide Ecosystem.
 
 [![Run in Insomnia](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Monoxide&uri=https%3A%2F%2Fapi-monoxide.ezralazuardy.com%2Fv1%2FMonoxide.json)
 
-![Preview](https://user-images.githubusercontent.com/24422019/161047593-0ba0604a-c7df-4ed9-9bef-64e48c2bb561.png)
+![Preview](https://user-images.githubusercontent.com/24422019/161944206-93d5662a-ec29-40d6-9362-f14d2a0801e4.png)
 
 > Written in [TypeScript](https://www.typescriptlang.org) using [Nuxt](https://v3.nuxtjs.org) and [Vue](https://vuejs.org). Powered by [Netlify](https://www.netlify.com), [Prisma](https://www.prisma.io), and [PlanetScale](https://planetscale.com).
