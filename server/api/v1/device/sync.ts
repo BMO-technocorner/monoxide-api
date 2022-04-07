@@ -3,7 +3,7 @@ import type { PrismaClient } from "~/helpers/prisma";
 import { withHTTPMethod } from "~/helpers/http";
 import { handleServerError } from "~/helpers/api";
 
-async function onGET(
+async function onPOST(
   req: IncomingMessage,
   res: ServerResponse,
   prisma: PrismaClient
@@ -45,4 +45,4 @@ async function onGET(
   return handleServerError(res);
 }
 
-export default withHTTPMethod({ onGET });
+export default withHTTPMethod({ onPOST });
