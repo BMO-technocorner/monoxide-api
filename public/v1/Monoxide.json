@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-05T05:13:24.831Z",
+  "__export_date": "2022-04-07T00:28:05.701Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -37,7 +37,7 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         }
       ],
@@ -107,7 +107,7 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         }
       ],
@@ -160,12 +160,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -209,7 +209,7 @@
       "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
       "modified": 1648969742302,
       "created": 1648969742302,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
       "name": "Add New Client's Room",
       "description": "> Authorizable by Client\n\nThis endpoint used to add a new client's room data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```",
       "method": "POST",
@@ -237,12 +237,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -262,7 +262,7 @@
       "parentId": "fld_c7abfd300328464a9a7dcab3c5a84b10",
       "modified": 1648969762957,
       "created": 1648969762957,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
       "name": "Update Existing Client's Room",
       "description": "> Authorizable by Client\n\nThis endpoint used to update an existing client's room data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number|positive\n```\n\n**Required Body (JSON):**\n```bash\nname: string|min:2|max:255\n```",
       "method": "PUT",
@@ -297,12 +297,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -349,12 +349,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -407,12 +407,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -472,12 +472,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -524,12 +524,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -549,7 +549,7 @@
       "parentId": "fld_15dcf0505ca6424aa1af8173a899f5dd",
       "modified": 1649065118391,
       "created": 1649065118391,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
       "name": "Update Existing Client's Device",
       "description": "> Authorizable by Client\n\nThis endpoint used to update an existing client's device data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number|positive\n```\n\n**Required Body (JSON):**\n```bash\nroomId: number|positive\nname: string|min:2|max:255\n```",
       "method": "PUT",
@@ -584,12 +584,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -629,12 +629,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -666,7 +666,7 @@
       "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
       "modified": 1649128896029,
       "created": 1649128896029,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile/reset-password",
       "name": "Reset Client's Account Password",
       "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account password.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\npassword: string|min:8|max:255\nconfirmPassword: equal:password\n```",
       "method": "PUT",
@@ -694,12 +694,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -719,7 +719,7 @@
       "parentId": "fld_6a9307a53f6f4150a14f307320ccb3ff",
       "modified": 1649129243016,
       "created": 1649129243016,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/profile",
       "name": "Update Client's Account Profile",
       "description": "> Authorizable by Client\n\nThis endpoint used to update the client's account profile.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Body (JSON):**\n```bash\nemail: email|normalize|max:255\nname: string|min:2|max:255\naddress: string\n```",
       "method": "PUT",
@@ -747,12 +747,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -817,12 +817,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -854,7 +854,7 @@
       "parentId": "fld_6f0077afc47f4ff289b114d99230b278",
       "modified": 1649097787783,
       "created": 1649097787783,
-      "url": "",
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/reports",
       "name": "Update Existing Client's Report Status",
       "description": "> Authorizable by Client\n\nThis endpoint used to update an existing client's report status. Report's status can only be updated once with either of these values: `ACCEPTED` or `CLOSED`.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Required Query Parameters:**\n```bash\nid: number\n```\n\n**Required Body (JSON):**\n```bash\nstatus: string|min:4|max:255\nmessage: string|optional\n```",
       "method": "PUT",
@@ -889,12 +889,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_CLIENT_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -939,12 +939,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1016,12 +1016,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1069,12 +1069,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1127,12 +1127,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1203,12 +1203,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1275,12 +1275,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Authorization",
-          "value": "Bearer {{ _.MONOXIDE_GUARD_BEARER_TOKEN }}",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1320,13 +1320,13 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "id": "pair_b5986134b97c42a9b3becc5bd2653710",
           "name": "Device-Key",
-          "value": "{{ _.MONOXIDE_DEVICE_KEY }}",
+          "value": "{{ _.DEVICE_KEY }}",
           "description": ""
         }
       ],
@@ -1398,12 +1398,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Device-Key",
-          "value": "{{ _.MONOXIDE_DEVICE_KEY }}",
+          "value": "{{ _.DEVICE_KEY }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1462,12 +1462,12 @@
         },
         {
           "name": "Api-Key",
-          "value": "{{ _.MONOXIDE_API_KEY }}",
+          "value": "{{ _.API_KEY }}",
           "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
         },
         {
           "name": "Device-Key",
-          "value": "{{ _.MONOXIDE_DEVICE_KEY }}",
+          "value": "{{ _.DEVICE_KEY }}",
           "id": "pair_97f6f1828b22445d95a612820fadfb15"
         }
       ],
@@ -1488,20 +1488,8 @@
       "modified": 1648625650386,
       "created": 1648625650386,
       "name": "Base Environment",
-      "data": {
-        "MONOXIDE_API_KEY": "04d5d2f1-0caa-49dd-8293-a3c2466bed78",
-        "MONOXIDE_DEVICE_KEY": "6e0dcdf1-95a5-4981-96ed-9d2291d7db16",
-        "MONOXIDE_CLIENT_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJpYXQiOjE2NDg5NzMxMDYsImV4cCI6MTY4MDA3NzEwNn0.Z9RtGMVD4GKyDZZwxfQtg6VQ8CIO3pU7Z63Ty-Cx1EY",
-        "MONOXIDE_GUARD_BEARER_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJpYXQiOjE2NDkwOTQxMDAsImV4cCI6MTY4MDE5ODEwMH0._u13vPaJ5ACaWDiVet38o9AqfnwRvbL-CjUmCIz9pcA"
-      },
-      "dataPropertyOrder": {
-        "&": [
-          "MONOXIDE_API_KEY",
-          "MONOXIDE_DEVICE_KEY",
-          "MONOXIDE_CLIENT_BEARER_TOKEN",
-          "MONOXIDE_GUARD_BEARER_TOKEN"
-        ]
-      },
+      "data": {},
+      "dataPropertyOrder": {},
       "color": null,
       "isPrivate": false,
       "metaSortKey": 1648625650386,
@@ -1525,48 +1513,6 @@
       "contents": "",
       "contentType": "yaml",
       "_type": "api_spec"
-    },
-    {
-      "_id": "env_0c56a837aecd4cdfb13f23563d788859",
-      "parentId": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
-      "modified": 1648625763046,
-      "created": 1648625763046,
-      "name": "Monoxide Production",
-      "data": {
-        "API_URL": "https://api-monoxide.ezralazuardy.com",
-        "API_VERSION": "v1"
-      },
-      "dataPropertyOrder": {
-        "&": [
-          "API_URL",
-          "API_VERSION"
-        ]
-      },
-      "color": "#cb7167",
-      "isPrivate": false,
-      "metaSortKey": 1648625763046,
-      "_type": "environment"
-    },
-    {
-      "_id": "env_3993d11afffd42558c67354e18ba45c0",
-      "parentId": "env_0cf83e865ff62bf605cb4c13c86c6daac8a1f0fb",
-      "modified": 1648765932057,
-      "created": 1648765932057,
-      "name": "Monoxide Development",
-      "data": {
-        "API_URL": "http://localhost:3000",
-        "API_VERSION": "v1"
-      },
-      "dataPropertyOrder": {
-        "&": [
-          "API_URL",
-          "API_VERSION"
-        ]
-      },
-      "color": "#7d69cb",
-      "isPrivate": false,
-      "metaSortKey": 1648765932057,
-      "_type": "environment"
     }
   ]
 }
