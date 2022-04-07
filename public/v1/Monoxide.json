@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-07T00:30:32.661Z",
+  "__export_date": "2022-04-07T08:43:27.766Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -1303,7 +1303,7 @@
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/device/sync",
       "name": "Synchronize Device Uptime",
       "description": "> Authorizable by Device\n\nThis endpoint used to synchronize the device uptime on the server. Using this endpoint on the first time device boot will register the device `uid` to the server. No request body is required.\n\n**Required Headers:**\n```bash\nApi-Key\nDevice-Key\n```",
-      "method": "POST",
+      "method": "GET",
       "body": {},
       "parameters": [],
       "headers": [
