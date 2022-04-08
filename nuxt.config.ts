@@ -14,6 +14,10 @@ const serverMiddleware = [
   { path: "/v1/client/devices", handler: "~/server/api/v1/client/devices.ts" },
   { path: "/v1/client/reports", handler: "~/server/api/v1/client/reports.ts" },
   { path: "/v1/client/rooms", handler: "~/server/api/v1/client/rooms.ts" },
+  {
+    path: "/v1/client/statistics",
+    handler: "~/server/api/v1/client/statistics.ts",
+  },
 
   // guard
   {
@@ -23,6 +27,10 @@ const serverMiddleware = [
   { path: "/v1/guard/profile", handler: "~/server/api/v1/guard/profile.ts" },
   { path: "/v1/guard/reports", handler: "~/server/api/v1/guard/reports.ts" },
   { path: "/v1/guard/users", handler: "~/server/api/v1/guard/users.ts" },
+  {
+    path: "/v1/guard/statistics",
+    handler: "~/server/api/v1/guard/statistics.ts",
+  },
 
   // device
   { path: "/v1/device/report", handler: "~/server/api/v1/device/report.ts" },

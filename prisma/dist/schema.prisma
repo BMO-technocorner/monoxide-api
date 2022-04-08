@@ -46,6 +46,8 @@ model User {
   reports   Report[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([id, role], name: "belongsToRole")
 }
 
 model Room {

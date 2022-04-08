@@ -9,7 +9,46 @@ async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify pagination cursor
   const { skip, take } = await usePaginate(event);
 
-  // return data
+  // verify identifier
+  const id = await useIdentifier(event);
+
+  // return singular data
+  if (id > 0) {
+    const room = await prisma.room.findUnique({
+      where: {
+        belongsTo: {
+          ownerId: (event.req as any).user.id,
+          id,
+        },
+      },
+      include: {
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            address: true,
+            updatedAt: true,
+            createdAt: true,
+          },
+        },
+      },
+    });
+    if (!room) {
+      event.res.statusCode = 404;
+      return event.res.end(
+        JSON.stringify({
+          statusCode: 404,
+          statusMessage: "Not Found",
+          message: "There is no room with this identifier.",
+        })
+      );
+    }
+    return room;
+  }
+
+  // return collection data
   return await prisma.room.findMany({
     skip,
     take,

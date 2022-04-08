@@ -1,7 +1,7 @@
 {
   "_type": "export",
   "__export_format": 4,
-  "__export_date": "2022-04-08T03:56:35.107Z",
+  "__export_date": "2022-04-08T11:54:14.696Z",
   "__export_source": "insomnia.desktop.app:v2022.2.1",
   "resources": [
     {
@@ -128,8 +128,8 @@
       "modified": 1648969727940,
       "created": 1648969727940,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/rooms",
-      "name": "Get All Client's Room",
-      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\n```",
+      "name": "Get Client's Room",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's room data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nid: number|positive\n```\n\nUsing `id` query param will deactive the other query params that applied.",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -375,8 +375,8 @@
       "modified": 1648625895277,
       "created": 1648625895277,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/devices",
-      "name": "Get All Client's Devices",
-      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\n```",
+      "name": "Get Client's Devices",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's device data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nid: number|positive\n```\n\nUsing `id` query param will deactive the other query params that applied.",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -773,8 +773,8 @@
       "modified": 1649079221650,
       "created": 1649079221650,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/client/reports",
-      "name": "Get All Client's Report",
-      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's report data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nstatus: string (all|open|accepted|closed)\nlevel: string (all|client|guard)\n```",
+      "name": "Get Client's Report",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get all the client's report data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nstatus: string (all|open|accepted|closed)\nlevel: string (all|client|guard)\nid: number|positive\n```\n\nUsing `id` query param will deactive the other query params that applied.",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -908,6 +908,63 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
+    },
+    {
+      "_id": "req_cd171fd0c08b4f289bdaed7e5ce6be3c",
+      "parentId": "fld_e5ec37dfd75148f3a03cc105d5b90d0a",
+      "modified": 1649409837618,
+      "created": 1649409837618,
+      "url": "",
+      "name": "Get Client's Statistics",
+      "description": "> Authorizable by Client\n\nThis endpoint used to get the client's statistic data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.CLIENT_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_e5ec37dfd75148f3a03cc105d5b90d0a",
+      "parentId": "fld_f7f13860d7e74a809920f8a379006c24",
+      "modified": 1649409812347,
+      "created": 1649409812347,
+      "name": "Statistics",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 400,
+      "_type": "request_group"
     },
     {
       "_id": "req_c0ce9c6889c84147a534f0ed331facf3",
@@ -1095,8 +1152,8 @@
       "modified": 1649093925678,
       "created": 1649093925678,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/users",
-      "name": "Get All Client User",
-      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the client's user data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\n```",
+      "name": "Get Client Users",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the client's user data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nid: number|positive\n```\n\nUsing `id` query param will deactive the other query params that applied.",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -1156,7 +1213,7 @@
       "description": "",
       "environment": {},
       "environmentPropertyOrder": null,
-      "metaSortKey": 200,
+      "metaSortKey": 300,
       "_type": "request_group"
     },
     {
@@ -1165,8 +1222,8 @@
       "modified": 1649093871488,
       "created": 1649093871488,
       "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/reports",
-      "name": "Get All Report",
-      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the reports data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number (default 0)\ntake: number (default 15)\nstatus: string (all|open|accepted|closed)\n```",
+      "name": "Get Reports",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get all the reports data, with a pagination support.\n\nIn order to implement the pagination feature, please refer to this docs: https://www.prisma.io/docs/concepts/components/prisma-client/pagination#offset-pagination.\n\nWe use a offset-based pagination.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```\n\n**Optional Query Parameters:**\n```bash\nskip: number|positive (default 0)\ntake: number|positive (default 15)\nstatus: string (all|open|accepted|closed)\nid: number|positive\n```\n\nUsing `id` query param will deactive the other query params that applied.",
       "method": "GET",
       "body": {},
       "parameters": [
@@ -1294,6 +1351,63 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
+    },
+    {
+      "_id": "req_559e388d8252453aa2736e1407e65ec0",
+      "parentId": "fld_d5cff502c672483dbe3f1fef45ce09d5",
+      "modified": 1649416712336,
+      "created": 1649416712336,
+      "url": "{{ _.API_URL }}/{{ _.API_VERSION }}/guard/statistics",
+      "name": "Get Guard's Statistics",
+      "description": "> Authorizable by Guard\n\nThis endpoint used to get the guard's statistic data.\n\n**Required Headers:**\n```bash\nApi-Key\nAuthorization\n```",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_1dd64b76aaae49e7878fdcdbe92d133b",
+          "name": "Accept",
+          "value": "application/json",
+          "description": ""
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia",
+          "id": "pair_bb2c9ff58fec4f14847959befd03b000"
+        },
+        {
+          "name": "Api-Key",
+          "value": "{{ _.API_KEY }}",
+          "id": "pair_b39e3215e20c4f56b2352479cb042e2e"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.GUARD_BEARER_TOKEN }}",
+          "id": "pair_97f6f1828b22445d95a612820fadfb15"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_d5cff502c672483dbe3f1fef45ce09d5",
+      "parentId": "fld_fee5e0d358a748e28f060722b4d62693",
+      "modified": 1649416700599,
+      "created": 1649416700599,
+      "name": "Statistics",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": 200,
+      "_type": "request_group"
     },
     {
       "_id": "req_03a70dec703d4f348543b4b398a47e3f",

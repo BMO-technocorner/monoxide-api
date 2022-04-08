@@ -9,7 +9,52 @@ async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify pagination cursor
   const { skip, take } = await usePaginate(event);
 
-  // return data
+  // verify identifier
+  const id = await useIdentifier(event);
+
+  // return singular data
+  if (id > 0) {
+    const device = await prisma.device.findUnique({
+      where: {
+        belongsTo: {
+          ownerId: (event.req as any).user.id,
+          id,
+        },
+      },
+      include: {
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            address: true,
+            updatedAt: true,
+            createdAt: true,
+          },
+        },
+        room: true,
+        deviceSync: true,
+        reports: {
+          take: 5,
+          orderBy: [{ id: "desc" }],
+        },
+      },
+    });
+    if (!device) {
+      event.res.statusCode = 404;
+      return event.res.end(
+        JSON.stringify({
+          statusCode: 404,
+          statusMessage: "Not Found",
+          message: "There is no device with this identifier.",
+        })
+      );
+    }
+    return device;
+  }
+
+  // return collection data
   return await prisma.device.findMany({
     skip,
     take,

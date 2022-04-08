@@ -12,6 +12,9 @@ async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify pagination cursor
   const { skip, take } = await usePaginate(event);
 
+  // verify identifier
+  const id = await useIdentifier(event);
+
   // verify status and level query
   const param = await useQuery(event);
   (where as any).level = "GUARD";
@@ -24,7 +27,41 @@ async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   )
     (where as any).status = String(param.status).toUpperCase();
 
-  // return data
+  // return singular data
+  if (id > 0) {
+    const report = await prisma.report.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        owner: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            address: true,
+            updatedAt: true,
+            createdAt: true,
+          },
+        },
+        device: true,
+      },
+    });
+    if (!report) {
+      event.res.statusCode = 404;
+      return event.res.end(
+        JSON.stringify({
+          statusCode: 404,
+          statusMessage: "Not Found",
+          message: "There is no report with this identifier.",
+        })
+      );
+    }
+    return report;
+  }
+
+  // return collection data
   return await prisma.report.findMany({
     skip,
     take,
