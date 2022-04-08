@@ -77,7 +77,7 @@ async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   const validation = useValidator({
     body,
     rules: {
-      detectionLevel: "number|min:1|max:3",
+      detectionLevel: "number|min:1|max:2",
     },
   });
   if (validation !== true) return handleValidation(event, validation);
@@ -125,9 +125,6 @@ async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify detection level
   switch (body.detectionLevel) {
     case 2:
-      (data as any).detectionLevel = "MEDIUM";
-      break;
-    case 3:
       (data as any).detectionLevel = "HIGH";
       break;
     default:
