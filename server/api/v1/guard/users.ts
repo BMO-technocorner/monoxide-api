@@ -1,15 +1,11 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { withHTTPMethod } from "~/helpers/http";
 import { usePaginate } from "~/helpers/api";
 
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify pagination cursor
-  const { skip, take } = await usePaginate(req);
+  const { skip, take } = await usePaginate(event);
 
   // return data
   return await prisma.user.findMany({

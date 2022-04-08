@@ -1,24 +1,20 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError, usePaginate, useIdentifier } from "~/helpers/api";
 
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify pagination cursor
-  const { skip, take } = await usePaginate(req);
+  const { skip, take } = await usePaginate(event);
 
   // return data
   return await prisma.room.findMany({
     skip,
     take,
     where: {
-      ownerId: (req as any).user.id,
+      ownerId: (event.req as any).user.id,
     },
     orderBy: [{ name: "asc" }],
     include: {
@@ -37,25 +33,21 @@ async function onGET(
   });
 }
 
-async function onPOST(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
       name: "string|min:2|max:255",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // save room
   const room = await prisma.room.create({
     data: {
-      ownerId: (req as any).user.id,
+      ownerId: (event.req as any).user.id,
       name: body.name,
     },
     include: {
@@ -75,8 +67,8 @@ async function onPOST(
 
   // return data
   if (room) {
-    res.statusCode = 201;
-    return res.end(
+    event.res.statusCode = 201;
+    return event.res.end(
       JSON.stringify({
         id: room.id,
         name: room.name,
@@ -88,32 +80,28 @@ async function onPOST(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
-async function onPUT(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPUT(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
       name: "string|min:2|max:255",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // get request param identifier
-  const id = await useIdentifier(req);
+  const id = await useIdentifier(event);
 
   // verify room id
   const room = await prisma.room.findUnique({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -132,8 +120,8 @@ async function onPUT(
     },
   });
   if (!room) {
-    res.statusCode = 404;
-    return res.end(
+    event.res.statusCode = 404;
+    return event.res.end(
       JSON.stringify({
         statusCode: 404,
         statusMessage: "Not Found",
@@ -146,7 +134,7 @@ async function onPUT(
   const updatedRoom = await prisma.room.update({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -170,8 +158,8 @@ async function onPUT(
 
   // return data
   if (updatedRoom) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: updatedRoom.id,
         name: updatedRoom.name,
@@ -183,22 +171,18 @@ async function onPUT(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
-async function onDELETE(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onDELETE(event: CompatibilityEvent, prisma: PrismaClient) {
   // get request param identifier
-  const id = await useIdentifier(req);
+  const id = await useIdentifier(event);
 
   // verify room id
   const room = await prisma.room.findUnique({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -217,8 +201,8 @@ async function onDELETE(
     },
   });
   if (!room) {
-    res.statusCode = 404;
-    return res.end(
+    event.res.statusCode = 404;
+    return event.res.end(
       JSON.stringify({
         statusCode: 404,
         statusMessage: "Not Found",
@@ -231,7 +215,7 @@ async function onDELETE(
   const deletedRoom = await prisma.room.delete({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -252,8 +236,8 @@ async function onDELETE(
 
   // return data
   if (deletedRoom) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         message: `${deletedRoom.name} has been successfully deleted.`,
         data: {
@@ -268,7 +252,7 @@ async function onDELETE(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onGET, onPOST, onPUT, onDELETE });

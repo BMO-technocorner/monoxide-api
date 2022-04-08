@@ -1,13 +1,17 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 
-export default async (req: IncomingMessage, res: ServerResponse) => {
+export default async (event: CompatibilityEvent) => {
   // allow authorization on api endpoints
-  if (req.url && !req.url.includes("/api/") && !req.url.includes("/v1/"))
+  if (
+    event.req.url &&
+    !event.req.url.includes("/api/") &&
+    !event.req.url.includes("/v1/")
+  )
     return;
 
-  if (req.headers["api-key"] === process.env.API_KEY) return;
-  res.statusCode = 401;
-  return res.end(
+  if (event.req.headers["api-key"] === process.env.API_KEY) return;
+  event.res.statusCode = 401;
+  return event.res.end(
     JSON.stringify({
       statusCode: 401,
       statusMessage: "Unauthorized",

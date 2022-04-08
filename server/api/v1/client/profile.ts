@@ -1,25 +1,17 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError } from "~/helpers/api";
 
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
-  return (req as any).user;
+async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
+  return (event.req as any).user;
 }
 
-async function onPUT(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPUT(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
@@ -28,7 +20,7 @@ async function onPUT(
       address: "string",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // verify email is unique
   const existingUser = await prisma.user.findUnique({
@@ -36,9 +28,9 @@ async function onPUT(
       email: body.email,
     },
   });
-  if (existingUser && existingUser.id !== (req as any).user.id) {
-    res.statusCode = 400;
-    return res.end(
+  if (existingUser && existingUser.id !== (event.req as any).user.id) {
+    event.res.statusCode = 400;
+    return event.res.end(
       JSON.stringify({
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -50,7 +42,7 @@ async function onPUT(
   // update user
   const updatedUser = await prisma.user.update({
     where: {
-      id: (req as any).user.id,
+      id: (event.req as any).user.id,
     },
     data: {
       email: body.email,
@@ -69,8 +61,8 @@ async function onPUT(
 
   // return data
   if (updatedUser) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: updatedUser.id,
         email: updatedUser.email,
@@ -86,7 +78,7 @@ async function onPUT(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onGET, onPUT });

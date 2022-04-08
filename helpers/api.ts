@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import { useQuery } from "h3";
 
 export const matchPath = (path: Array<string>, target: string): boolean => {
@@ -6,9 +6,9 @@ export const matchPath = (path: Array<string>, target: string): boolean => {
   return false;
 };
 
-export const handleServerError = (res: ServerResponse) => {
-  res.statusCode = 500;
-  return res.end(
+export const handleServerError = (event: CompatibilityEvent) => {
+  event.res.statusCode = 500;
+  return event.res.end(
     JSON.stringify({
       statusCode: 500,
       statusMessage: "Internal Server Error",
@@ -17,8 +17,8 @@ export const handleServerError = (res: ServerResponse) => {
   );
 };
 
-export const usePaginate = async (req: IncomingMessage) => {
-  const param = await useQuery(req);
+export const usePaginate = async (event: CompatibilityEvent) => {
+  const param = await useQuery(event);
   let skip = 0;
   let take = 15;
   if (param) {
@@ -36,8 +36,8 @@ export const usePaginate = async (req: IncomingMessage) => {
   return { skip, take };
 };
 
-export const useIdentifier = async (req: IncomingMessage) => {
-  const param = await useQuery(req);
+export const useIdentifier = async (event: CompatibilityEvent) => {
+  const param = await useQuery(event);
   let id = 0;
   if (param && param.id) {
     try {

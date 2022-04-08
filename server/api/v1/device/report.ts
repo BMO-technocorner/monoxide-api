@@ -1,17 +1,13 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError, useIdentifier } from "~/helpers/api";
 
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // get request param identifier
-  const id = await useIdentifier(req);
+  const id = await useIdentifier(event);
 
   // verify report id
   const report = await prisma.report.findUnique({
@@ -36,8 +32,8 @@ async function onGET(
 
   // return data
   if (report) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: report.id,
         message: report.message,
@@ -52,8 +48,8 @@ async function onGET(
   }
 
   // handle error
-  res.statusCode = 404;
-  return res.end(
+  event.res.statusCode = 404;
+  return event.res.end(
     JSON.stringify({
       statusCode: 404,
       statusMessage: "Not Found",
@@ -62,16 +58,12 @@ async function onGET(
   );
 }
 
-async function onPOST(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify device key
-  const uid = String(req.headers["device-key"]);
+  const uid = String(event.req.headers["device-key"]);
   if (uid !== process.env.DEVICE_KEY) {
-    res.statusCode = 401;
-    return res.end(
+    event.res.statusCode = 401;
+    return event.res.end(
       JSON.stringify({
         statusCode: 401,
         statusMessage: "Unauthorized",
@@ -81,14 +73,14 @@ async function onPOST(
   }
 
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
       detectionLevel: "number|min:1|max:3",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // verify device
   const sync = await prisma.deviceSync.findUnique({
@@ -114,8 +106,8 @@ async function onPOST(
     },
   });
   if (!sync || !sync.device || !sync.device.owner || (sync && !sync.device)) {
-    res.statusCode = 404;
-    return res.end(
+    event.res.statusCode = 404;
+    return event.res.end(
       JSON.stringify({
         statusCode: 404,
         statusMessage: "Not Found",
@@ -164,8 +156,8 @@ async function onPOST(
 
   // return data
   if (report) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: report.id,
         message: report.message,
@@ -180,7 +172,7 @@ async function onPOST(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onGET, onPOST });

@@ -1,5 +1,4 @@
-import type { ServerResponse } from "http";
-import { createError } from "h3";
+import type { CompatibilityEvent } from "h3";
 import Validator from "fastest-validator";
 
 export class Validation {
@@ -15,9 +14,12 @@ export const useValidator = (schema: Partial<Validation>) => {
   return check(schema.body);
 };
 
-export const handleValidation = (res: ServerResponse, validation: any) => {
-  res.statusCode = 400;
-  return res.end(
+export const handleValidation = (
+  event: CompatibilityEvent,
+  validation: any
+) => {
+  event.res.statusCode = 400;
+  return event.res.end(
     JSON.stringify({
       statusCode: 400,
       statusMessage: "Bad Request",

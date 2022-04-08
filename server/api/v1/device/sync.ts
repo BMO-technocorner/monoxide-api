@@ -1,18 +1,14 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { withHTTPMethod } from "~/helpers/http";
 import { handleServerError } from "~/helpers/api";
 
-async function onPOST(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify device key
-  const uid = String(req.headers["device-key"]);
+  const uid = String(event.req.headers["device-key"]);
   if (uid !== process.env.DEVICE_KEY) {
-    res.statusCode = 401;
-    return res.end(
+    event.res.statusCode = 401;
+    return event.res.end(
       JSON.stringify({
         statusCode: 401,
         statusMessage: "Unauthorized",
@@ -32,8 +28,8 @@ async function onPOST(
 
   // return data
   if (sync) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         message: "Device has been successfully synchronized.",
         sync: sync,
@@ -42,7 +38,7 @@ async function onPOST(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onPOST });

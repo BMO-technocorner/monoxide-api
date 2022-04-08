@@ -1,16 +1,16 @@
-import type { IncomingMessage, ServerResponse } from "http";
-import { defineHandle } from "h3";
+import type { CompatibilityEvent } from "h3";
+import { defineEventHandler } from "h3";
 import { usePrisma } from "~/helpers/prisma";
 import HTTPAction from "~/models/HTTPAction";
 import HTTPMethod from "~/models/HTTPMethod";
 
-export const useHTTPAction = (req: IncomingMessage, res: ServerResponse) => {
-  return new HTTPAction(req, res, usePrisma());
+export const useHTTPAction = (event: CompatibilityEvent) => {
+  return new HTTPAction(event, usePrisma());
 };
 
 export const withHTTPMethod = (method: Partial<HTTPMethod>) => {
-  return defineHandle(async (req: IncomingMessage, res: ServerResponse) => {
-    const action = useHTTPAction(req, res);
+  return defineEventHandler(async (event: CompatibilityEvent) => {
+    const action = useHTTPAction(event);
     action.onGET = method.onGET ?? null;
     action.onHEAD = method.onHEAD ?? null;
     action.onPOST = method.onPOST ?? null;

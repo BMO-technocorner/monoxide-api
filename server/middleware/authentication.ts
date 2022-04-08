@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import { useTokenPayloadID } from "~/helpers/jwt";
 import { usePrisma } from "~/helpers/prisma";
 import { matchPath } from "~/helpers/api";
@@ -17,9 +17,13 @@ export const isGuard = (user: any): boolean => {
   return user && user.role === "GUARD";
 };
 
-export default async (req: IncomingMessage, res: ServerResponse) => {
+export default async (event: CompatibilityEvent) => {
   // allow authentication on api endpoints
-  if (req.url && !req.url.includes("/api/") && !req.url.includes("/v1/"))
+  if (
+    event.req.url &&
+    !event.req.url.includes("/api/") &&
+    !event.req.url.includes("/v1/")
+  )
     return;
 
   // match private api only
@@ -28,17 +32,20 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       privateClientApiPath
         .concat(privateGuardApiPath)
         .concat(privateDeviceApiPath),
-      String(req.url)
+      String(event.req.url)
     )
   ) {
     return;
   }
 
   // verify device key (device endpoint)
-  if (matchPath(privateDeviceApiPath, String(req.url))) {
-    if (!req.headers["device-key"] || req.headers["device-key"] === "") {
-      res.statusCode = 401;
-      return res.end(
+  if (matchPath(privateDeviceApiPath, String(event.req.url))) {
+    if (
+      !event.req.headers["device-key"] ||
+      event.req.headers["device-key"] === ""
+    ) {
+      event.res.statusCode = 401;
+      return event.res.end(
         JSON.stringify({
           statusCode: 401,
           statusMessage: "Unauthorized",
@@ -51,11 +58,11 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 
   // verify bearer token (client / guard endpoint)
   if (
-    req.headers["authorization"] &&
-    req.headers["authorization"].startsWith("Bearer")
+    event.req.headers["authorization"] &&
+    event.req.headers["authorization"].startsWith("Bearer")
   ) {
     try {
-      const token = req.headers["authorization"].split(" ")[1];
+      const token = event.req.headers["authorization"].split(" ")[1];
       const id = parseInt(useTokenPayloadID(token));
       const prisma = usePrisma();
       const user = await prisma.user.findUnique({
@@ -65,12 +72,13 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       if (user) {
         // verify role authorization
         if (
-          (matchPath(privateClientApiPath, String(req.url)) &&
+          (matchPath(privateClientApiPath, String(event.req.url)) &&
             !isClient(user)) ||
-          (matchPath(privateGuardApiPath, String(req.url)) && !isGuard(user))
+          (matchPath(privateGuardApiPath, String(event.req.url)) &&
+            !isGuard(user))
         ) {
-          res.statusCode = 401;
-          return res.end(
+          event.res.statusCode = 401;
+          return event.res.end(
             JSON.stringify({
               statusCode: 401,
               statusMessage: "Unauthorized",
@@ -80,7 +88,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         }
 
         // save user data in request object
-        (req as any).user = {
+        (event.req as any).user = {
           id: user.id,
           name: user.name,
           email: user.email,
@@ -92,8 +100,8 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       return;
     } catch (e) {}
   }
-  res.statusCode = 401;
-  return res.end(
+  event.res.statusCode = 401;
+  return event.res.end(
     JSON.stringify({
       statusCode: 401,
       statusMessage: "Unauthorized",

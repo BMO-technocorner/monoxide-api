@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
@@ -6,13 +6,9 @@ import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError } from "~/helpers/api";
 import { useHash } from "~/helpers/hash";
 
-async function onPUT(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPUT(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
@@ -20,7 +16,7 @@ async function onPUT(
       confirmPassword: { type: "equal", field: "password" },
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // hash password
   const hashedPassword = await useHash(body.password);
@@ -28,7 +24,7 @@ async function onPUT(
   // update user
   const updatedUser = await prisma.user.update({
     where: {
-      id: (req as any).user.id,
+      id: (event.req as any).user.id,
     },
     data: {
       password: hashedPassword,
@@ -37,8 +33,8 @@ async function onPUT(
 
   // return data
   if (updatedUser) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: updatedUser.id,
         email: updatedUser.email,
@@ -51,7 +47,7 @@ async function onPUT(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onPUT });

@@ -1,27 +1,23 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useQuery, useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
 import { useValidator, handleValidation } from "~/helpers/validator";
 import { handleServerError, usePaginate, useIdentifier } from "~/helpers/api";
 
-async function onGET(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onGET(event: CompatibilityEvent, prisma: PrismaClient) {
   // define custom db query
   let where = {
     device: {
-      ownerId: (req as any).user.id,
+      ownerId: (event.req as any).user.id,
     },
   };
 
   // verify pagination cursor
-  const { skip, take } = await usePaginate(req);
+  const { skip, take } = await usePaginate(event);
 
   // verify status and level query
-  const param = await useQuery(req);
+  const param = await useQuery(event);
   if (
     param &&
     param.status &&
@@ -61,13 +57,9 @@ async function onGET(
   });
 }
 
-async function onPUT(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPUT(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
@@ -75,12 +67,12 @@ async function onPUT(
       message: "string|optional",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // verify status variant
   if (body.status !== "ACCEPTED" && body.status !== "CLOSED") {
-    res.statusCode = 400;
-    return res.end(
+    event.res.statusCode = 400;
+    return event.res.end(
       JSON.stringify({
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -90,13 +82,13 @@ async function onPUT(
   }
 
   // get request param identifier
-  const id = await useIdentifier(req);
+  const id = await useIdentifier(event);
 
   // verify report id
   const report = await prisma.report.findUnique({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -116,8 +108,8 @@ async function onPUT(
     },
   });
   if (!report) {
-    res.statusCode = 404;
-    return res.end(
+    event.res.statusCode = 404;
+    return event.res.end(
       JSON.stringify({
         statusCode: 404,
         statusMessage: "Not Found",
@@ -128,8 +120,8 @@ async function onPUT(
 
   // verify report status
   if (report.status !== "OPEN") {
-    res.statusCode = 400;
-    return res.end(
+    event.res.statusCode = 400;
+    return event.res.end(
       JSON.stringify({
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -142,7 +134,7 @@ async function onPUT(
   const updatedReport = await prisma.report.update({
     where: {
       belongsTo: {
-        ownerId: (req as any).user.id,
+        ownerId: (event.req as any).user.id,
         id,
       },
     },
@@ -169,8 +161,8 @@ async function onPUT(
 
   // return data
   if (updatedReport) {
-    res.statusCode = 200;
-    return res.end(
+    event.res.statusCode = 200;
+    return event.res.end(
       JSON.stringify({
         id: updatedReport.id,
         message: updatedReport.message,
@@ -185,7 +177,7 @@ async function onPUT(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onGET, onPUT });

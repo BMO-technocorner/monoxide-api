@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from "http";
+import type { CompatibilityEvent } from "h3";
 import type { PrismaClient } from "~/helpers/prisma";
 import { useBody } from "h3";
 import { withHTTPMethod } from "~/helpers/http";
@@ -6,13 +6,9 @@ import { useValidator, handleValidation } from "~/helpers/validator";
 import { useHash } from "~/helpers/hash";
 import { handleServerError } from "~/helpers/api";
 
-async function onPOST(
-  req: IncomingMessage,
-  res: ServerResponse,
-  prisma: PrismaClient
-) {
+async function onPOST(event: CompatibilityEvent, prisma: PrismaClient) {
   // verify request body
-  const body = await useBody(req);
+  const body = await useBody(event);
   const validation = useValidator({
     body,
     rules: {
@@ -22,7 +18,7 @@ async function onPOST(
       address: "string",
     },
   });
-  if (validation !== true) return handleValidation(res, validation);
+  if (validation !== true) return handleValidation(event, validation);
 
   // check if email exist
   const emailExist = await prisma.user.findUnique({
@@ -31,8 +27,8 @@ async function onPOST(
     },
   });
   if (emailExist) {
-    res.statusCode = 400;
-    return res.end(
+    event.res.statusCode = 400;
+    return event.res.end(
       JSON.stringify({
         statusCode: 400,
         statusMessage: "Bad Request",
@@ -65,8 +61,8 @@ async function onPOST(
 
   // return data
   if (user) {
-    res.statusCode = 201;
-    return res.end(
+    event.res.statusCode = 201;
+    return event.res.end(
       JSON.stringify({
         id: user.id,
         name: user.name,
@@ -80,7 +76,7 @@ async function onPOST(
   }
 
   // handle error
-  return handleServerError(res);
+  return handleServerError(event);
 }
 
 export default withHTTPMethod({ onPOST });
