@@ -542,13 +542,14 @@ const monoxideAcronyms = [
                 substance prevention. This project was initially developed for
                 an IoT competition.
               </p>
-              <button
+              <NuxtLink
+                to="https://ezralazuardy.medium.com/the-monoxide-project-806ffca0d134"
+                target="_blank"
+                title="Read Our Story"
                 class="block w-full py-2 px-6 text-center bg-violet-600 font-extrabold text-md rounded-lg shadow text-gray-100 active:bg-violet-800 sm:inline-block sm:w-auto hover:scale-105 active:scale-95 transition disabled:cursor-not-allowed disabled:bg-violet-800"
-                title="Documentation is in progress..."
-                disabled
               >
                 Read Our Story
-              </button>
+              </NuxtLink>
             </div>
           </div>
         </div>
